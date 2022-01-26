@@ -18,9 +18,11 @@
         <!-- 数据库连接 -->
         <jdbcConnection
                 driverClass="com.mysql.cj.jdbc.Driver"
-                connectionURL="jdbc:mysql://localhost:3306/rentmysql"
+                connectionURL="jdbc:mysql://localhost:3306/dump?serverTimezone=Asia/Shanghai"
                 userId="root"
-                password="123456"/>
+                password="123456">
+            <property name="nullCatalogMeansCurrent" value="true" />
+        </jdbcConnection>
 
 
         <javaModelGenerator targetPackage="com.example.demo.bean" targetProject="src/main/java"/>
@@ -29,7 +31,12 @@
 
         <javaClientGenerator targetPackage="com.example.demo.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
 
-        <table tableName="room" domainObjectName="Room"/>
+        <table schema="dump" tableName="room">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table schema="dump" tableName="user">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
 
     </context>
 </generatorConfiguration>
