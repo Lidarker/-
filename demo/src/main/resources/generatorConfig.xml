@@ -37,6 +37,18 @@
         <table schema="dump" tableName="user">
             <property name="useActualColumnNames" value="true"/>
         </table>
+        <table schema="dump" tableName="picture">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table schema="dump" tableName="comment">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table schema="dump" tableName="collection">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+        <table schema="dump" tableName="browse">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
 
     </context>
 </generatorConfiguration>
