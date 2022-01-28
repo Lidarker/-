@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "aliiconfont"; /* Project id 3165769 */
+  src: url('iconfont.woff2?t=1643380675576') format('woff2'),
+       url('iconfont.woff?t=1643380675576') format('woff'),
+       url('iconfont.ttf?t=1643380675576') format('truetype');
+}
+
+.aliiconfont {
+  font-family: "aliiconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.al-icontousu:before {
+  content: "\e67b";
+}
+
+.al-iconliuyan:before {
+  content: "\e744";
+}
+
+.al-iconshoucang:before {
+  content: "\e627";
+}
+
+.al-iconzhuce:before {
+  content: "\e71c";
+}
+
+.al-iconlogin:before {
+  content: "\e8ef";
+}
+

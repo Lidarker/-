@@ -1,6 +1,23 @@
 import Vue from 'vue'
 import App from './App.vue'
-import { Table, TableColumn, Button, Popover, Tag, Image, Link, Menu, Submenu, MenuItem, Row, Col, Input, Card } from 'element-ui'
+import { 
+  Table, TableColumn, 
+  Button, 
+  Popover, 
+  Tag, 
+  Image, 
+  Link, 
+  Menu, 
+  Submenu, MenuItem, 
+  Row, 
+  Col, 
+  Input, 
+  Card, 
+  Form, FormItem, 
+  Carousel, CarouselItem, 
+  Avatar,
+  Dialog
+} from 'element-ui'
 
 import './assets/icon/iconfont.css'
 
@@ -20,8 +37,12 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(Input)
 Vue.use(Card)
-
-
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Carousel)
+Vue.use(CarouselItem)
+Vue.use(Avatar)
+Vue.use(Dialog)
 
 new Vue({
   render: h => h(App),

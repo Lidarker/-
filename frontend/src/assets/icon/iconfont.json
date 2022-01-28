@@ -1,0 +1,44 @@
+{
+  "id": "3165769",
+  "name": "front",
+  "font_family": "aliiconfont",
+  "css_prefix_text": "al-icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "6992718",
+      "name": "投诉",
+      "font_class": "tousu",
+      "unicode": "e67b",
+      "unicode_decimal": 59003
+    },
+    {
+      "icon_id": "577348",
+      "name": "留言",
+      "font_class": "liuyan",
+      "unicode": "e744",
+      "unicode_decimal": 59204
+    },
+    {
+      "icon_id": "2674484",
+      "name": "收藏",
+      "font_class": "shoucang",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
+      "icon_id": "7090090",
+      "name": "注册",
+      "font_class": "zhuce",
+      "unicode": "e71c",
+      "unicode_decimal": 59164
+    },
+    {
+      "icon_id": "6598349",
+      "name": "login",
+      "font_class": "login",
+      "unicode": "e8ef",
+      "unicode_decimal": 59631
+    }
+  ]
+}
