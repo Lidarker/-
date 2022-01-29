@@ -22,7 +22,10 @@ import {
   Breadcrumb, BreadcrumbItem,
   Container, Header, Aside, Main, 
   Switch,
-  TimePicker
+  TimePicker,
+  Select, Option,
+  CheckboxGroup, Checkbox, 
+  Tooltip
 } from 'element-ui'
 
 import './assets/icon/iconfont.css'
@@ -62,6 +65,11 @@ Vue.use(Aside)
 Vue.use(Main)
 Vue.use(Switch)
 Vue.use(TimePicker)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(CheckboxGroup)
+Vue.use(Checkbox)
+Vue.use(Tooltip)
 
 new Vue({
   render: h => h(App),

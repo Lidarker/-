@@ -26,8 +26,6 @@
           style="height: 100%"
           default-active="2"
           class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
         >
           <el-menu-item index="1">
             <span slot="title">开关系统</span>
@@ -56,7 +54,9 @@
         </el-menu>
       </el-aside>
       <el-main>
-        <SystemOpenSetting></SystemOpenSetting>
+        <!-- <SystemOpenSetting></SystemOpenSetting> -->
+        <!-- <AdministratorManagement></AdministratorManagement> -->
+        <UserManagement></UserManagement>
       </el-main>
     </el-container>
   </el-container>
@@ -64,9 +64,13 @@
 
 <script>
 import SystemOpenSetting from "./SystemOpenSetting";
+import AdministratorManagement from "./AdministratorManagement";
+import UserManagement from "./UserManagement"
 export default {
   components: {
     SystemOpenSetting,
+    AdministratorManagement,
+    UserManagement
   },
 };
 </script>
