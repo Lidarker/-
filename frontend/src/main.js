@@ -27,7 +27,8 @@ import {
   CheckboxGroup, Checkbox, 
   Tooltip,
   MessageBox,
-  Message
+  Message,
+  Upload
 } from 'element-ui'
 
 import './assets/icon/iconfont.css'
@@ -73,6 +74,7 @@ Vue.use(Option)
 Vue.use(CheckboxGroup)
 Vue.use(Checkbox)
 Vue.use(Tooltip)
+Vue.use(Upload)
 
 Vue.prototype.$prompt = MessageBox.prompt
 Vue.prototype.$message = Message

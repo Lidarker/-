@@ -70,6 +70,64 @@
         </el-button>
       </span>
     </el-dialog>
+    <el-dialog title="发布房源" :visible.sync="uploadVisible" width="40%">
+      <el-form label-position="right" label-width="100px">
+        <el-form-item label="所在地址">
+          <el-input v-model="editData.address"></el-input>
+        </el-form-item>
+        <el-form-item label="月租/元">
+          <el-input type="number" v-model="editData.price"></el-input>
+        </el-form-item>
+        <el-form-item label="房屋类型">
+          <el-input v-model="editData.type"></el-input>
+        </el-form-item>
+        <el-form-item label="房产证编号">
+          <el-input v-model="editData.number"></el-input>
+        </el-form-item>
+        <el-form-item label="优劣">
+          <el-input
+            type="textarea"
+            :rows="4"
+            placeholder="请输入内容"
+            v-model="editData.advance"
+          >
+          </el-input>
+        </el-form-item>
+        <el-form-item label="图片">
+          <el-upload
+            class="upload-demo"
+            ref="upload"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :limit="10"
+            :before-upload="beforeAvatarUpload"
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :file-list="fileList"
+            :auto-upload="false"
+          >
+            <el-button slot="trigger" size="small" type="primary"
+              >选取文件</el-button
+            >
+            <div slot="tip" class="el-upload__tip">
+              只能上传jpg/png文件，且不超过500kb
+            </div>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="uploadVisible = false">取 消</el-button>
+        <el-button type="primary" @click="uploadVisible = false">
+          确 定
+        </el-button>
+      </span>
+    </el-dialog>
+    <el-button
+      @click="uploadVisible = true"
+      type="warning"
+      class="upload-room-button"
+    >
+      发布房源
+    </el-button>
   </div>
 </template>
 
@@ -85,6 +143,8 @@ export default {
         number: "",
         advance: "",
       },
+      uploadVisible: false,
+
       tableData: [
         {
           src: "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
@@ -108,6 +168,7 @@ export default {
           price: 2000,
         },
       ],
+      fileList: [],
     };
   },
   methods: {
@@ -130,9 +191,45 @@ export default {
         })
         .catch(() => {});
     },
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning(
+        `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
+          files.length + fileList.length
+        } 个文件`
+      );
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}？`);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024  < 500;
+
+      if (!isJPG) {
+        this.$message.error("上传头像图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 500KB!");
+      }
+      return isJPG && isLt2M;
+    },
   },
 };
 </script>
 
 <style>
+.upload-room-button {
+  top: 10%;
+  right: 10px;
+  position: fixed;
+  border-radius: 8px;
+  height: 60px;
+  font-size: 20px;
+}
 </style>

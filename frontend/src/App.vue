@@ -1,12 +1,13 @@
 <template>
   <div>
-    <MyHousePage />
+    <UserSettingPage />
   </div>
 </template>
 
 <script>
 import HomePage from "./components/HomePage";
 import MyHousePage from "./components/MyHousePage";
+import UserSettingPage from "./components/UserSettingPage"
 import LoginPage from "./components/LoginPage";
 import FogerPasswordPage from "./components/ForgetPasswordPage";
 import RegisterPage from "./components/RegisterPage";
@@ -18,6 +19,7 @@ export default {
   components: {
     HomePage,
     MyHousePage,
+    UserSettingPage,
     LoginPage,
     FogerPasswordPage,
     RegisterPage,
