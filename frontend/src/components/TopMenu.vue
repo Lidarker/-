@@ -15,7 +15,7 @@
     </el-col>
     <el-col :span="10">
       <el-menu
-        :default-active="activeIndex"
+        default-active="1"
         class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
@@ -34,8 +34,9 @@
     </el-col>
     <el-col :span="6" style="align: middle">
       <el-input
+        v-if="!isMyHouse"
         placeholder="请输入内容"
-        v-model="input3"
+        v-model="searchInput"
         class="input-with-select"
       >
         <el-button slot="append" icon="el-icon-search"></el-button>
@@ -52,12 +53,11 @@
       >
         未登录
       </span>
-      <el-dropdown v-else  trigger="click">
+      <el-dropdown v-else trigger="click">
         <el-avatar
           class="el-dropdown-link"
-          size="20"
           src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
-          style="vertical-align: middle; cursor: pointer; "
+          style="vertical-align: middle; cursor: pointer"
         ></el-avatar>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>我的消息</el-dropdown-item>
@@ -74,11 +74,10 @@
 export default {
   data() {
     return {
-      activeIndex: "1",
-      activeIndex2: "1",
+      searchInput: "",
     };
   },
-  props: ["isLogin"],
+  props: ["isLogin", "isMyHouse"],
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);

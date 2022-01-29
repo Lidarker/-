@@ -25,12 +25,15 @@ import {
   TimePicker,
   Select, Option,
   CheckboxGroup, Checkbox, 
-  Tooltip
+  Tooltip,
+  MessageBox,
+  Message
 } from 'element-ui'
 
 import './assets/icon/iconfont.css'
 
 Vue.config.productionTip = false
+
 
 Vue.use(Table)
 Vue.use(TableColumn)
@@ -70,6 +73,9 @@ Vue.use(Option)
 Vue.use(CheckboxGroup)
 Vue.use(Checkbox)
 Vue.use(Tooltip)
+
+Vue.prototype.$prompt = MessageBox.prompt
+Vue.prototype.$message = Message
 
 new Vue({
   render: h => h(App),

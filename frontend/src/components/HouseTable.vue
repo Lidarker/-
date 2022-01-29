@@ -1,15 +1,14 @@
 <template>
   <el-table :data="tableData" style="width: 100%">
-    <el-table-column label="图片" width="280">
+    <el-table-column label="房屋图片" width="280">
       <template slot-scope="scope">
         <el-image
           style="width: 100px; height: 100px"
           :src="scope.row.src"
-          :fit="fit"
         ></el-image>
       </template>
     </el-table-column>
-    <el-table-column label="描述">
+    <el-table-column label="房屋简介">
       <template slot-scope="scope">
         <span style="font-size: 24px">
           {{ scope.row.city }}&nbsp;{{ scope.row.rooms }}
@@ -21,7 +20,7 @@
         <p style="font-size: 10px; margin: 0">{{ scope.row.description }}</p>
       </template>
     </el-table-column>
-    <el-table-column label="价格" width="300">
+    <el-table-column label="房屋价格" width="300">
       <template slot-scope="scope">
         <div class="room-price" style="font-size: 24px; color: red">
           {{ scope.row.price }}元/月
