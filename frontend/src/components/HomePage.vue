@@ -1,7 +1,7 @@
 <template>
   <div>
-    <PageHeader />
-    <TopMenu />
+    <PageHeader v-if="!isLogin"/>
+    <TopMenu :isLogin="isLogin"/>
     <KeywordSearch />
     <HouseTable />
   </div>
@@ -13,6 +13,11 @@ import TopMenu from "./TopMenu.vue";
 import KeywordSearch from "./KeywordSearch.vue";
 import HouseTable from "./HouseTable.vue";
 export default {
+  data(){
+    return {
+      isLogin: true,
+    }
+  },
   components: {
     PageHeader,
     TopMenu,

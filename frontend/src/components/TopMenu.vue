@@ -45,9 +45,27 @@
       :span="3"
       style="text-align: center; height: 60px; line-height: 60px"
     >
-      <span class="avater" style="text-align: center; color: #999999"
-        >未登录</span
+      <span
+        v-if="!isLogin"
+        class="avater"
+        style="text-align: center; color: #999999"
       >
+        未登录
+      </span>
+      <el-dropdown v-else  trigger="click">
+        <el-avatar
+          class="el-dropdown-link"
+          size="20"
+          src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+          style="vertical-align: middle; cursor: pointer; "
+        ></el-avatar>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>我的消息</el-dropdown-item>
+          <el-dropdown-item>浏览记录</el-dropdown-item>
+          <el-dropdown-item>账户设置</el-dropdown-item>
+          <el-dropdown-item>退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </el-col>
   </el-row>
 </template>
@@ -60,6 +78,7 @@ export default {
       activeIndex2: "1",
     };
   },
+  props: ["isLogin"],
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
@@ -69,7 +88,4 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  display: inline;
-}
 </style>

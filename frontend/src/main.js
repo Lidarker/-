@@ -9,14 +9,20 @@ import {
   Link, 
   Menu, 
   Submenu, MenuItem, 
-  Row, 
-  Col, 
+  Row, Col, 
   Input, 
   Card, 
   Form, FormItem, 
   Carousel, CarouselItem, 
   Avatar,
-  Dialog
+  Dialog,
+  PageHeader, 
+  Divider, 
+  Dropdown, DropdownMenu, DropdownItem, 
+  Breadcrumb, BreadcrumbItem,
+  Container, Header, Aside, Main, 
+  Switch,
+  TimePicker
 } from 'element-ui'
 
 import './assets/icon/iconfont.css'
@@ -43,6 +49,19 @@ Vue.use(Carousel)
 Vue.use(CarouselItem)
 Vue.use(Avatar)
 Vue.use(Dialog)
+Vue.use(PageHeader)
+Vue.use(Divider)
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
+Vue.use(Container)
+Vue.use(Header)
+Vue.use(Aside)
+Vue.use(Main)
+Vue.use(Switch)
+Vue.use(TimePicker)
 
 new Vue({
   render: h => h(App),
