@@ -56,7 +56,9 @@
       <el-main>
         <!-- <SystemOpenSetting></SystemOpenSetting> -->
         <!-- <AdministratorManagement></AdministratorManagement> -->
-        <UserManagement></UserManagement>
+        <!-- <UserManagement></UserManagement> -->
+        <!-- <HouseManagement></HouseManagement> -->
+        <UserAudit></UserAudit>
       </el-main>
     </el-container>
   </el-container>
@@ -66,11 +68,15 @@
 import SystemOpenSetting from "./SystemOpenSetting";
 import AdministratorManagement from "./AdministratorManagement";
 import UserManagement from "./UserManagement"
+import HouseManagement from "./HouseManagement"
+import UserAudit from "./UserAudit"
 export default {
   components: {
     SystemOpenSetting,
     AdministratorManagement,
-    UserManagement
+    UserManagement,
+    HouseManagement,
+    UserAudit
   },
 };
 </script>
