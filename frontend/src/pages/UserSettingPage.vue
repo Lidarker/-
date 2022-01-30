@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import TopMenu from "./TopMenu.vue";
+import TopMenu from "../components/TopMenu.vue";
 export default {
   data() {
     return {
@@ -101,6 +101,14 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    handleAvatarSuccess(){
+
+    },
+    beforeAvatarUpload(){
+
+    }
   },
   components: {
     TopMenu,

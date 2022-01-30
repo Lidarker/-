@@ -14,6 +14,7 @@
       <i
         class="aliiconfont al-icontuichu"
         style="float: right; font-size: 25px; margin-top: 13px; cursor: pointer"
+        @click="routerPush('/login')"
       ></i>
       <span id="adm-name" style="float: right; margin-top: 15px">
         123456，您好！
@@ -24,19 +25,20 @@
       <el-aside width="200px">
         <el-menu
           style="height: 100%"
-          default-active="2"
+          :default-active="activeIndex"
           class="el-menu-vertical-demo"
+          router
         >
-          <el-menu-item index="1">
+          <el-menu-item index="/administrator/open-setting">
             <span slot="title">开关系统</span>
           </el-menu-item>
-          <el-menu-item index="2">
+          <el-menu-item index="/administrator/administrator-management">
             <span slot="title">管理员管理</span>
           </el-menu-item>
-          <el-menu-item index="3">
+          <el-menu-item index="/administrator/user-management">
             <span slot="title">用户管理</span>
           </el-menu-item>
-          <el-menu-item index="4">
+          <el-menu-item index="/administrator/house-management">
             <span slot="title">房源管理</span>
           </el-menu-item>
           <el-menu-item index="5">
@@ -48,35 +50,26 @@
           <el-menu-item index="7">
             <span slot="title">房源投诉</span>
           </el-menu-item>
-          <el-menu-item index="8">
+          <el-menu-item index="/administrator/user-audit">
             <span slot="title">用户审核</span>
           </el-menu-item>
         </el-menu>
       </el-aside>
       <el-main>
-        <!-- <SystemOpenSetting></SystemOpenSetting> -->
-        <!-- <AdministratorManagement></AdministratorManagement> -->
-        <!-- <UserManagement></UserManagement> -->
-        <!-- <HouseManagement></HouseManagement> -->
-        <UserAudit></UserAudit>
+        <router-view></router-view>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
-import SystemOpenSetting from "./SystemOpenSetting";
-import AdministratorManagement from "./AdministratorManagement";
-import UserManagement from "./UserManagement"
-import HouseManagement from "./HouseManagement"
-import UserAudit from "./UserAudit"
 export default {
-  components: {
-    SystemOpenSetting,
-    AdministratorManagement,
-    UserManagement,
-    HouseManagement,
-    UserAudit
+  components: {},
+  props: ["activeIndex"],
+  methods: {
+    routerPush(to) {
+      this.$router.push(to);
+    },
   },
 };
 </script>

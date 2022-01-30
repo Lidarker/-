@@ -19,7 +19,9 @@
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-link style="float: left" href="#">忘记密码</el-link>
+          <el-link style="float: left" @click="routerPush('/forget-password')"
+            >忘记密码</el-link
+          >
           <el-link style="float: right" @click="administratorVisible = true">
             管理员登录
           </el-link>
@@ -71,7 +73,7 @@
 </template>
 
 <script>
-import CommonTop from "./CommonTop";
+import CommonTop from "../components/CommonTop";
 
 export default {
   data() {
@@ -93,6 +95,9 @@ export default {
     },
     onAdministratorLoginSubmit() {
       console.log(this.administratorForm);
+    },
+    routerPush(to) {
+      this.$router.push(to);
     },
   },
   components: {

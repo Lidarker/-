@@ -157,7 +157,8 @@ export default {
       console.log("collect");
     },
     goBack() {
-      console.log("go back");
+      console.log(this.$router);
+      this.$router.back()
     },
   },
 };

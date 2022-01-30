@@ -1,13 +1,13 @@
 <template>
   <div>
-    <TopMenu :isLogin="true" :isMyHouse="true" />
+    <TopMenu activeIndex="/my-house"/>
     <MyHouseTable />
   </div>
 </template>
 
 <script>
-import TopMenu from "./TopMenu.vue";
-import MyHouseTable from "./MyHouseTable.vue";
+import TopMenu from "../components/TopMenu.vue";
+import MyHouseTable from "../components/MyHouseTable.vue";
 export default {
   components: {
     TopMenu,

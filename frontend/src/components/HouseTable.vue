@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="tableData" style="width: 100%">
+  <el-table :data="tableData" style="width: 100%" @row-click="handleClick" class="house-table">
     <el-table-column label="房屋图片" width="280">
       <template slot-scope="scope">
         <el-image
@@ -60,6 +60,9 @@ export default {
     };
   },
   methods: {
+    handleClick(){
+      this.$router.push('/house-detail');
+    },
     handleEdit(index, row) {
       console.log(index, row);
     },
@@ -71,4 +74,7 @@ export default {
 </script>
 
 <style>
+.house-table .el-table__row{
+  cursor: pointer;
+} 
 </style>

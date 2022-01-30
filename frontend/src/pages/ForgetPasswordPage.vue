@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import CommonTop from "./CommonTop";
+import CommonTop from "../components/CommonTop";
 
 export default {
   data() {

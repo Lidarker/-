@@ -1,30 +1,32 @@
 import Vue from 'vue'
 import App from './App.vue'
-import { 
-  Table, TableColumn, 
-  Button, 
-  Popover, 
-  Tag, 
-  Image, 
-  Link, 
-  Menu, 
-  Submenu, MenuItem, 
-  Row, Col, 
-  Input, 
-  Card, 
-  Form, FormItem, 
-  Carousel, CarouselItem, 
+import Vuex from 'vuex'
+import VueRouter from 'vue-router'
+import {
+  Table, TableColumn,
+  Button,
+  Popover,
+  Tag,
+  Image,
+  Link,
+  Menu,
+  Submenu, MenuItem,
+  Row, Col,
+  Input,
+  Card,
+  Form, FormItem,
+  Carousel, CarouselItem,
   Avatar,
   Dialog,
-  PageHeader, 
-  Divider, 
-  Dropdown, DropdownMenu, DropdownItem, 
+  PageHeader,
+  Divider,
+  Dropdown, DropdownMenu, DropdownItem,
   Breadcrumb, BreadcrumbItem,
-  Container, Header, Aside, Main, 
+  Container, Header, Aside, Main,
   Switch,
   TimePicker,
   Select, Option,
-  CheckboxGroup, Checkbox, 
+  CheckboxGroup, Checkbox,
   Tooltip,
   MessageBox,
   Message,
@@ -32,9 +34,12 @@ import {
 } from 'element-ui'
 
 import './assets/icon/iconfont.css'
+import store from './store'
+import router from './router'
 
 Vue.config.productionTip = false
 
+Vue.use(VueRouter)
 
 Vue.use(Table)
 Vue.use(TableColumn)
@@ -81,4 +86,6 @@ Vue.prototype.$message = Message
 
 new Vue({
   render: h => h(App),
+  store,
+  router
 }).$mount('#app')

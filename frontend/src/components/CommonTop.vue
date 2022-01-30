@@ -3,15 +3,15 @@
     <PageHeader />
     <el-divider></el-divider>
     <el-link
-      href="https://element.eleme.io"
+      @click="router_push('/')"
       target="_blank"
       style="font-size: 30px"
     >
       长租公寓平台
     </el-link>
-    <div style="font-size: 14px; margin-top: 15px;">
+    <div style="font-size: 14px; margin-top: 15px">
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item :to="{ path: '/' }">
+        <el-breadcrumb-item to="/">
           <i class="el-icon-house"></i>主页
         </el-breadcrumb-item>
         <el-breadcrumb-item> {{ pos }}</el-breadcrumb-item>
@@ -27,6 +27,11 @@ export default {
     PageHeader,
   },
   props: ["pos"],
+  methods: {
+    router_push(to) {
+      this.$router.push(to);
+    },
+  },
 };
 </script>
 

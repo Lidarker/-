@@ -6,7 +6,7 @@
   >
     <el-col :span="4">
       <el-link
-        href="https://element.eleme.io"
+        @click="routerPush('/')"
         target="_blank"
         style="font-size: 30px"
       >
@@ -15,14 +15,15 @@
     </el-col>
     <el-col :span="10">
       <el-menu
-        default-active="1"
+        :default-active="activeIndex"
         class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
+        router
       >
-        <el-menu-item index="1">主页</el-menu-item>
+        <el-menu-item index="/">主页</el-menu-item>
         <el-menu-item index="2">收藏</el-menu-item>
-        <el-menu-item index="3">我的房源</el-menu-item>
+        <el-menu-item index="/my-house">我的房源</el-menu-item>
         <el-submenu index="4">
           <template slot="title">个人中心</template>
           <el-menu-item index="4-1">我的消息</el-menu-item>
@@ -34,7 +35,7 @@
     </el-col>
     <el-col :span="6" style="align: middle">
       <el-input
-        v-if="!isMyHouse"
+        v-if="activeIndex === '/'"
         placeholder="请输入内容"
         v-model="searchInput"
         class="input-with-select"
@@ -47,13 +48,13 @@
       style="text-align: center; height: 60px; line-height: 60px"
     >
       <span
-        v-if="!isLogin"
+        v-if="!$store.state.isLogin"
         class="avater"
         style="text-align: center; color: #999999"
       >
         未登录
       </span>
-      <el-dropdown v-else trigger="click">
+      <el-dropdown v-else trigger="click" @command="routerPush">
         <el-avatar
           class="el-dropdown-link"
           src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
@@ -62,7 +63,7 @@
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>我的消息</el-dropdown-item>
           <el-dropdown-item>浏览记录</el-dropdown-item>
-          <el-dropdown-item>账户设置</el-dropdown-item>
+          <el-dropdown-item command="user-setting">账户设置</el-dropdown-item>
           <el-dropdown-item>退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -77,10 +78,13 @@ export default {
       searchInput: "",
     };
   },
-  props: ["isLogin", "isMyHouse"],
+  props:["activeIndex"],
   methods: {
     handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
+    },
+    routerPush(to) {
+      this.$router.push(to);
     },
   },
 };
