@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PageHeader v-if="!$store.state.isLogin"/>
+    <PageHeader v-if="!$store.state.access_token"/>
     <TopMenu activeIndex="/"/>
     <KeywordSearch />
     <HouseTable />
@@ -15,7 +15,6 @@ import HouseTable from "../components/HouseTable.vue";
 export default {
   data(){
     return {
-      isLogin: true,
     }
   },
   components: {

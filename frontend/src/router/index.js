@@ -8,13 +8,13 @@ import MyHousePage from "../pages/MyHousePage"
 import UserSettingPage from "../pages/UserSettingPage"
 import AdministratorPage from "../pages/AdministratorPage"
 
-import SystemOpenSetting from "../components/SystemOpenSetting";
-import AdministratorManagement from "../components/AdministratorManagement";
-import UserManagement from "../components/UserManagement"
-import HouseManagement from "../components/HouseManagement"
-import UserAudit from "../components/UserAudit"
+import SystemOpenSetting from "../pages/AdministratorPage/SystemOpenSetting";
+import AdministratorManagement from "../pages/AdministratorPage/AdministratorManagement";
+import UserManagement from "../pages/AdministratorPage/UserManagement"
+import HouseManagement from "../pages/AdministratorPage/HouseManagement"
+import UserAudit from "../pages/AdministratorPage/UserAudit"
 
-
+import axios from "axios"
 
 const router = new VueRouter({
     mode: 'history',
@@ -25,7 +25,10 @@ const router = new VueRouter({
         },
         {
             path: '/login',
-            component: LoginPage
+            component: LoginPage,
+            meta: {
+                requireAuth: true,
+            }
         },
         {
             path: '/register',
@@ -39,7 +42,7 @@ const router = new VueRouter({
             path: '/my-house',
             component: MyHousePage,
             meta: {
-                requireAuth: true,
+                requireUserAuth: true,
             }
         },
         {
@@ -62,26 +65,37 @@ const router = new VueRouter({
                 {
                     path: 'open-setting',
                     component: SystemOpenSetting,
-
+                    meta: {
+                        requireAdminAuth: true,
+                    },
                 },
                 {
                     path: 'administrator-management',
                     component: AdministratorManagement,
-
+                    meta: {
+                        requireAdminAuth: true,
+                    },
                 },
                 {
                     path: 'user-management',
                     component: UserManagement,
-
+                    meta: {
+                        requireAdminAuth: true,
+                    },
                 },
                 {
                     path: 'house-management',
                     component: HouseManagement,
-
+                    meta: {
+                        requireAdminAuth: true,
+                    },
                 },
                 {
                     path: 'user-audit',
                     component: UserAudit,
+                    meta: {
+                        requireAdminAuth: true,
+                    },
                 },
             ]
 
@@ -91,17 +105,85 @@ const router = new VueRouter({
 
 
 
-//全局前置守卫：初始化时执行、每次路由切换前执行
 router.beforeEach((to, from, next) => {
-    if (to.meta.requireAuth) { //判断当前路由是否需要进行权限控制
-        if (localStorage.getItem('access_token')) { //权限控制的具体规则
-            next()
-        } else {
-            next("/login")
+    if (to.meta.requireAdminAuth) {
+        if (!localStorage.getItem('admin_access_token')) {
+            next('/login')
         }
+        else {
+            // 验证当前admin_access_token是否有效
+            axios.get('https://api.github.com/search/users?q=querryton').then(
+                response => {
+                    // 如果有效，则转向admin主页面
+                    if (true) {
+                        next()
+                    }
+                    // 如果无效，则进入login界面，且丢弃当前admin_access_token
+                    else {
+                        localStorage.removeItem("admin_access_token");
+                        next('/login')
+                    }
+                },
+                error => {
 
-    } else {
-        next() //放行
+                }
+            )
+        }
+    }
+    else if (to.meta.requireUserAuth) {
+        if (!localStorage.getItem('access_token')) {
+            next("/login")
+        } else {
+            // 验证当前access_token是否有效
+            axios.get('https://api.github.com/search/users?q=querryton').then(
+                response => {
+                    // 如果有效，则前进
+                    if (true) {
+                        next()
+                    }
+                    // 如果无效，则进入login界面，且丢弃当前access_token
+                    else {
+                        localStorage.removeItem("access_token");
+                        next('/login')
+                    }
+                },
+                error => {
+
+                }
+            )
+        }
+    }
+    else{
+        if (to.fullPath === "/login") {
+            if (!localStorage.getItem('access_token')) {
+                next()
+            }
+            else {
+                // 发送请求验证当前access_token是否有效
+                axios.get('https://api.github.com/search/users?q=querryton').then(
+                    response => {
+                        // 如果有效，则转向主页面
+                        if (true) {
+                            next("/")
+                        }
+                        // 如果无效，则进入login界面，且丢弃当前access_token
+                        else {
+                            localStorage.removeItem("access_token");
+                            next()
+                        }
+                    },
+                    error => {
+
+                    }
+                )
+            }
+        }
+        else if (to.fullPath === "/administrator") {
+            next("/administrator/open-setting")
+        }
+        else {
+            next()
+        }
     }
 })
 

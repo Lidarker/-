@@ -10,13 +10,15 @@ const actions = {
 }
 
 const mutations = {
-    // JIA(state,value){
-    // 	state.sum += value
-    // }
+    UPDATE_TOKEN(state) {
+        state.access_token = localStorage.getItem("access_token")
+        state.admin_access_token = localStorage.getItem("admin_access_token")
+    }
 }
 
 const state = {
-    isLogin: false,
+    access_token: localStorage.getItem("access_token"),
+    admin_access_token: localStorage.getItem("admin_access_token")
 }
 
 export default new Vuex.Store({

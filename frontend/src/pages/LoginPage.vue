@@ -74,6 +74,7 @@
 
 <script>
 import CommonTop from "../components/CommonTop";
+import axios from "axios";
 
 export default {
   data() {
@@ -91,10 +92,32 @@ export default {
   },
   methods: {
     onUserLoginSubmit() {
-      console.log(this.userForm);
+      // console.log(this.userForm);
+      axios.get("https://api.github.com/search/users?q=querryton").then(
+        (response) => {
+          console.log(response.data);
+          localStorage.setItem("access_token", "123");
+          this.$store.commit("UPDATE_TOKEN")
+          this.routerPush('/')
+        },
+        (error) => {
+          console.log(error.message);
+        }
+      );
     },
     onAdministratorLoginSubmit() {
-      console.log(this.administratorForm);
+      // console.log(this.administratorForm);
+      axios.get("https://api.github.com/search/users?q=querryton").then(
+        (response) => {
+          console.log(response.data);
+          localStorage.setItem("admin_access_token", "123");
+          this.$store.commit("UPDATE_TOKEN")
+          this.routerPush('/administrator')
+        },
+        (error) => {
+          console.log(error.message);
+        }
+      );
     },
     routerPush(to) {
       this.$router.push(to);

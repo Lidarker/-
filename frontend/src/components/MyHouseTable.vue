@@ -40,20 +40,26 @@
       </el-table-column>
     </el-table>
     <el-dialog title="修改房屋信息" :visible.sync="editVisible" width="40%">
-      <el-form label-position="right" label-width="100px">
-        <el-form-item label="所在地址">
+      <el-form
+        :model="editData"
+        :rules="rules"
+        ref="editForm"
+        label-position="right"
+        label-width="100px"
+      >
+        <el-form-item label="所在地址" prop="address">
           <el-input v-model="editData.address"></el-input>
         </el-form-item>
-        <el-form-item label="月租/元">
+        <el-form-item label="月租/元" prop="price">
           <el-input type="number" v-model="editData.price"></el-input>
         </el-form-item>
-        <el-form-item label="房屋类型">
+        <el-form-item label="房屋类型" prop="type">
           <el-input v-model="editData.type"></el-input>
         </el-form-item>
-        <el-form-item label="房产证编号">
+        <el-form-item label="房产证编号" prop="number">
           <el-input v-model="editData.number"></el-input>
         </el-form-item>
-        <el-form-item label="优劣">
+        <el-form-item label="优劣" prop="advance">
           <el-input
             type="textarea"
             :rows="4"
@@ -65,26 +71,30 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="editVisible = false">取 消</el-button>
-        <el-button type="primary" @click="editVisible = false">
-          确 定
-        </el-button>
+        <el-button type="primary" @click="submitEditForm"> 修 改 </el-button>
       </span>
     </el-dialog>
     <el-dialog title="发布房源" :visible.sync="uploadVisible" width="40%">
-      <el-form label-position="right" label-width="100px">
-        <el-form-item label="所在地址">
+      <el-form
+        :rules="rules"
+        :model="editData"
+        ref="houseForm"
+        label-position="right"
+        label-width="100px"
+      >
+        <el-form-item label="所在地址" prop="address">
           <el-input v-model="editData.address"></el-input>
         </el-form-item>
-        <el-form-item label="月租/元">
+        <el-form-item label="月租/元" prop="price">
           <el-input type="number" v-model="editData.price"></el-input>
         </el-form-item>
-        <el-form-item label="房屋类型">
+        <el-form-item label="房屋类型" prop="type">
           <el-input v-model="editData.type"></el-input>
         </el-form-item>
-        <el-form-item label="房产证编号">
+        <el-form-item label="房产证编号" prop="number">
           <el-input v-model="editData.number"></el-input>
         </el-form-item>
-        <el-form-item label="优劣">
+        <el-form-item label="优劣" prop="advance">
           <el-input
             type="textarea"
             :rows="4"
@@ -93,14 +103,13 @@
           >
           </el-input>
         </el-form-item>
-        <el-form-item label="图片">
+        <el-form-item label="图片" prop="picture">
           <el-upload
-            class="upload-demo"
             ref="upload"
             action="https://jsonplaceholder.typicode.com/posts/"
             :limit="10"
             :before-upload="beforeAvatarUpload"
-            :on-preview="handlePreview"
+            :on-change="handleChange"
             :on-remove="handleRemove"
             :file-list="fileList"
             :auto-upload="false"
@@ -116,9 +125,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="uploadVisible = false">取 消</el-button>
-        <el-button type="primary" @click="uploadVisible = false">
-          确 定
-        </el-button>
+        <el-button type="primary" @click="submitHouseForm"> 发 布 </el-button>
       </span>
     </el-dialog>
     <el-button
@@ -134,11 +141,16 @@
 <script>
 export default {
   data() {
+    var validateFile = (rule, value, callback) => {
+      if (this.fileList.length == 0) {
+        return callback(new Error("请上传房子图片"));
+      }
+    };
     return {
       editVisible: false,
       editData: {
         address: "",
-        price: 0,
+        price: undefined,
         type: "",
         number: "",
         advance: "",
@@ -169,6 +181,18 @@ export default {
         },
       ],
       fileList: [],
+      rules: {
+        address: [{ required: true, message: "请输入地址", trigger: "blur" }],
+        price: [{ required: true, message: "请输入月租", trigger: "blur" }],
+        type: [{ required: true, message: "请输入房屋类型", trigger: "blur" }],
+        number: [
+          { required: true, message: "请输入房产证编号", trigger: "blur" },
+        ],
+        advance: [
+          { required: true, message: "请输入房屋优劣", trigger: "blur" },
+        ],
+        picture: [{ required: true, validator: validateFile, trigger: "blur" }],
+      },
     };
   },
   methods: {
@@ -191,12 +215,6 @@ export default {
         })
         .catch(() => {});
     },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePreview(file) {
-      console.log(file);
-    },
     handleExceed(files, fileList) {
       this.$message.warning(
         `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
@@ -204,12 +222,15 @@ export default {
         } 个文件`
       );
     },
-    beforeRemove(file, fileList) {
-      return this.$confirm(`确定移除 ${file.name}？`);
+    handleChange(file, fileList) {
+      this.fileList = fileList;
+    },
+    handleRemove(file, fileList) {
+      this.fileList = fileList;
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024  < 500;
+      const isLt2M = file.size / 1024 < 500;
 
       if (!isJPG) {
         this.$message.error("上传头像图片只能是 JPG 格式!");
@@ -218,6 +239,30 @@ export default {
         this.$message.error("上传头像图片大小不能超过 500KB!");
       }
       return isJPG && isLt2M;
+    },
+    submitHouseForm() {
+      this.$refs["houseForm"].validate((valid) => {
+        if (valid) {
+          this.uploadVisible = false;
+          // this.$refs.upload.submit();
+          alert("submit!");
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+    submitEditForm() {
+      this.$refs["editForm"].validate((valid) => {
+        if (valid) {
+          this.editVisible = false;
+          // this.$refs.upload.submit();
+          alert("submit!");
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     },
   },
 };

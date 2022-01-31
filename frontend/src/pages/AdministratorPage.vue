@@ -14,7 +14,7 @@
       <i
         class="aliiconfont al-icontuichu"
         style="float: right; font-size: 25px; margin-top: 13px; cursor: pointer"
-        @click="routerPush('/login')"
+        @click="logOut"
       ></i>
       <span id="adm-name" style="float: right; margin-top: 15px">
         123456，您好！
@@ -70,6 +70,11 @@ export default {
     routerPush(to) {
       this.$router.push(to);
     },
+    logOut() {
+      localStorage.removeItem('admin_access_token');
+      this.$store.commit("UPDATE_TOKEN")
+      this.routerPush('/login');
+    }
   },
 };
 </script>
