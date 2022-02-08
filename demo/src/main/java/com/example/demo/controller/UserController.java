@@ -1,8 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.bean.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -18,6 +21,12 @@ public class UserController {
         return userService.login(userName, password);
     }
 
+    @RequestMapping(value = "/AdminLogin",method = RequestMethod.GET)
+    public boolean adminLogin(@RequestParam("userName") String userName,
+                         @RequestParam("password") String password){
+        return userService.adminLogin(userName, password);
+    }
+
     @RequestMapping(value = "/register",method = RequestMethod.GET)
     public String register(@RequestParam("phone") String phone,
                            @RequestParam("userName") String userName,
@@ -25,4 +34,15 @@ public class UserController {
         return userService.register(phone, userName, password);
     }
 
+    @RequestMapping(value = "/changePassword",method = RequestMethod.GET)
+    public String changePassword(@RequestParam("phone") String phone,
+                           @RequestParam("userName") String userName,
+                           @RequestParam("password") String password){
+        return userService.changePassword(phone, userName, password);
+    }
+
+    @RequestMapping(value = "/findAll",method = RequestMethod.GET)
+    public List<User> findAll(@RequestParam("isAdmin") boolean isAdmin){
+        return userService.findAllUser(isAdmin);
+    }
 }

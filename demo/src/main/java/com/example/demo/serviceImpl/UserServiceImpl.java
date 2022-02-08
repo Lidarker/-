@@ -7,6 +7,8 @@ import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -20,6 +22,16 @@ public class UserServiceImpl implements UserService {
         criteria.andAccountEqualTo(userName);
         criteria.andPasswordEqualTo(password);
         return !userMapper.selectByExample(userExample).isEmpty();   //查询结果为空则返回false
+    }
+
+    @Override
+    public boolean adminLogin(String userName, String password) {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andAccountEqualTo(userName);
+        criteria.andPasswordEqualTo(password);
+        criteria.andIsadminEqualTo(true);
+        return !userMapper.selectByExample(userExample).isEmpty();
     }
 
     @Override
@@ -42,4 +54,32 @@ public class UserServiceImpl implements UserService {
             return "该用户名已被使用";
         }
     }
+
+    @Override
+    public String changePassword(String phone, String userName, String password) {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andAccountEqualTo(userName);
+        criteria.andPhoneEqualTo(phone);
+        if (userMapper.selectByExample(userExample).size()==1){
+            User user = new User();
+            user.setPassword(password);
+            if (userMapper.updateByExampleSelective(user,userExample)==1){
+                return "修改成功";
+            }else {
+                return "异常错误";
+            }
+        }else {
+            return "账号或电话号码错误";
+        }
+    }
+
+    @Override
+    public List<User> findAllUser(boolean isAdmin) {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andIsadminEqualTo(isAdmin);
+        return userMapper.selectByExample(userExample);
+    }
+
 }
