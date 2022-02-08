@@ -43,12 +43,13 @@
         <table schema="dump" tableName="comment">
             <property name="useActualColumnNames" value="true"/>
         </table>
-        <table schema="dump" tableName="collection">
-            <property name="useActualColumnNames" value="true"/>
-        </table>
+        <table schema="dump" tableName="collection" domainObjectName="Collect"/>
+<!--        collection这个名字不好,会冲突-->
+<!--        <table schema="dump" tableName="collection">-->
+<!--            <property name="useActualColumnNames" value="true"/>-->
+<!--        </table>-->
         <table schema="dump" tableName="browse">
             <property name="useActualColumnNames" value="true"/>
         </table>
-
     </context>
 </generatorConfiguration>

@@ -284,8 +284,4 @@
     where uid = #{uid,jdbcType=INTEGER}
   </update>
 
-    <select id="getInfo" parameterType="String" resultType="com.example.demo.bean.UserBean">
-        SELECT * FROM user WHERE name = #{name} AND password = #{password}
-    </select>
-
 </mapper>
