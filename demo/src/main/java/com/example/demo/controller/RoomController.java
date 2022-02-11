@@ -4,10 +4,7 @@ import com.example.demo.bean.Room;
 import com.example.demo.service.RoomService;
 import com.example.demo.serviceImpl.RoomServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +14,7 @@ public class RoomController {
     @Autowired
     private RoomService roomService;
     @RequestMapping(value = "/getAllRoom",method = RequestMethod.GET)
+    @CrossOrigin
     public List<Room>getAllRoom(){return roomService.findAllRoom();}
     @RequestMapping(value = "/getRoom",params = {"city"},method = RequestMethod.GET)
     public List<Room>getRoomByCity(@RequestParam("city")String city)
