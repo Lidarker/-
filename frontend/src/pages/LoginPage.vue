@@ -93,7 +93,7 @@ export default {
   methods: {
     onUserLoginSubmit() {
       // console.log(this.userForm);
-      axios.get("http://localhost:8081/login",{
+      axios.get("http://localhost:8081/user/login",{
         params:{
           userName:this.userForm.userName,
           password:this.userForm.password
@@ -116,7 +116,7 @@ export default {
     },
     onAdministratorLoginSubmit() {
       // console.log(this.administratorForm);
-      axios.get("http://localhost:8081/AdminLogin",{
+      axios.get("http://localhost:8081/user/AdminLogin",{
         params:{
           userName:this.administratorForm.userName,
           password:this.administratorForm.password

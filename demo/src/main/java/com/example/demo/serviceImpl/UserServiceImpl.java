@@ -82,4 +82,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectByExample(userExample);
     }
 
+    @Override
+    public boolean deleteById(int uid) {
+        return userMapper.deleteByPrimaryKey(uid)==1;
+    }
+
 }

@@ -103,7 +103,7 @@ const router = new VueRouter({
     ]
 })
 
-
+//数据库设计没有考虑到token，现在用不到，先注释掉
 
 // router.beforeEach((to, from, next) => {
 //     if (to.meta.requireAdminAuth) {

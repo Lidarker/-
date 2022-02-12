@@ -157,7 +157,7 @@ export default {
     };
   },
   created(){
-    axios.get("http://localhost:8081/findAll",{
+    axios.get("http://localhost:8081/user/findAll",{
       params:{
         isAdmin:true
       }

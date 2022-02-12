@@ -72,24 +72,24 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      // options: [
-      //   {
-      //     value: "ID",
-      //     label: "ID",
-      //   },
-      //   {
-      //     value: "nickname",
-      //     label: "昵称",
-      //   },
-      //   {
-      //     value: "realName",
-      //     label: "真实姓名",
-      //   },
-      //   {
-      //     value: "gender",
-      //     label: "性别",
-      //   },
-      // ],
+      options: [
+        {
+          value: "ID",
+          label: "ID",
+        },
+        {
+          value: "nickname",
+          label: "昵称",
+        },
+        {
+          value: "realName",
+          label: "真实姓名",
+        },
+        {
+          value: "gender",
+          label: "性别",
+        },
+      ],
       tableData: [
         // {
         //   date: "2016-05-02",
@@ -116,17 +116,17 @@ export default {
     },
   },
   created(){
-      axios.get("http://localhost:8081/findAll",{
-        params:{
-          isAdmin:false
-        }
-      })
-      .then((Response)=>{
-        console.log("数据",Response.data);
-        console.log(this.tableData);
-        this.tableData=Response.data;
-      })
+    axios.get("http://localhost:8081/user/findAll",{
+      params:{
+        isAdmin:false
       }
+    })
+    .then((Response)=>{
+      console.log("数据",Response.data);
+      console.log(this.tableData);
+      this.tableData=Response.data;
+    })
+  }
 };
 </script>
 

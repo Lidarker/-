@@ -10,4 +10,5 @@ public interface UserService {
     String register(String phone,String userName,String password);
     String changePassword(String phone,String userName,String password);
     List<User> findAllUser(boolean isAdmin);
+    boolean deleteById(int uid);
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/user")
 @CrossOrigin
 public class UserController {
 
@@ -46,4 +46,7 @@ public class UserController {
     public List<User> findAll(@RequestParam("isAdmin") boolean isAdmin){
         return userService.findAllUser(isAdmin);
     }
+
+    @RequestMapping(value = "delete",method = RequestMethod.GET)
+    public boolean delete(@RequestParam("uid") int uid){return userService.deleteById(uid);}
 }
