@@ -156,6 +156,25 @@ export default {
       searchValue: "",
     };
   },
+  methods:{
+    handleDelete(index,row){
+      console.log(row.uid);
+      axios.get("http://localhost:8081/user/delete",{
+        params:{
+          uid:row.uid
+        }
+      })
+      .then((Response)=>{
+        if(Response.data){
+          window.alert('删除成功')
+          this.tableData.splice(index,1)
+          console.log(this.tableData);
+        }else{
+          window.alert('删除失败')
+        }
+      })
+    },
+  },
   created(){
     axios.get("http://localhost:8081/user/findAll",{
       params:{
