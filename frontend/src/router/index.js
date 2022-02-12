@@ -105,86 +105,86 @@ const router = new VueRouter({
 
 
 
-router.beforeEach((to, from, next) => {
-    if (to.meta.requireAdminAuth) {
-        if (!localStorage.getItem('admin_access_token')) {
-            next('/login')
-        }
-        else {
-            // 验证当前admin_access_token是否有效
-            axios.get('https://api.github.com/search/users?q=querryton').then(
-                response => {
-                    // 如果有效，则转向admin主页面
-                    if (true) {
-                        next()
-                    }
-                    // 如果无效，则进入login界面，且丢弃当前admin_access_token
-                    else {
-                        localStorage.removeItem("admin_access_token");
-                        next('/login')
-                    }
-                },
-                error => {
+// router.beforeEach((to, from, next) => {
+//     if (to.meta.requireAdminAuth) {
+//         if (!localStorage.getItem('admin_access_token')) {
+//             next('/login')
+//         }
+//         else {
+//             // 验证当前admin_access_token是否有效
+//             axios.get('https://api.github.com/search/users?q=querryton').then(
+//                 response => {
+//                     // 如果有效，则转向admin主页面
+//                     if (true) {
+//                         next()
+//                     }
+//                     // 如果无效，则进入login界面，且丢弃当前admin_access_token
+//                     else {
+//                         localStorage.removeItem("admin_access_token");
+//                         next('/login')
+//                     }
+//                 },
+//                 error => {
 
-                }
-            )
-        }
-    }
-    else if (to.meta.requireUserAuth) {
-        if (!localStorage.getItem('access_token')) {
-            next("/login")
-        } else {
-            // 验证当前access_token是否有效
-            axios.get('https://api.github.com/search/users?q=querryton').then(
-                response => {
-                    // 如果有效，则前进
-                    if (true) {
-                        next()
-                    }
-                    // 如果无效，则进入login界面，且丢弃当前access_token
-                    else {
-                        localStorage.removeItem("access_token");
-                        next('/login')
-                    }
-                },
-                error => {
+//                 }
+//             )
+//         }
+//     }
+//     else if (to.meta.requireUserAuth) {
+//         if (!localStorage.getItem('access_token')) {
+//             next("/login")
+//         } else {
+//             // 验证当前access_token是否有效
+//             axios.get('https://api.github.com/search/users?q=querryton').then(
+//                 response => {
+//                     // 如果有效，则前进
+//                     if (true) {
+//                         next()
+//                     }
+//                     // 如果无效，则进入login界面，且丢弃当前access_token
+//                     else {
+//                         localStorage.removeItem("access_token");
+//                         next('/login')
+//                     }
+//                 },
+//                 error => {
 
-                }
-            )
-        }
-    }
-    else{
-        if (to.fullPath === "/login") {
-            if (!localStorage.getItem('access_token')) {
-                next()
-            }
-            else {
-                // 发送请求验证当前access_token是否有效
-                axios.get('https://api.github.com/search/users?q=querryton').then(
-                    response => {
-                        // 如果有效，则转向主页面
-                        if (true) {
-                            next("/")
-                        }
-                        // 如果无效，则进入login界面，且丢弃当前access_token
-                        else {
-                            localStorage.removeItem("access_token");
-                            next()
-                        }
-                    },
-                    error => {
+//                 }
+//             )
+//         }
+//     }
+//     else{
+//         if (to.fullPath === "/login") {
+//             if (!localStorage.getItem('access_token')) {
+//                 next()
+//             }
+//             else {
+//                 // 发送请求验证当前access_token是否有效
+//                 axios.get('https://api.github.com/search/users?q=querryton').then(
+//                     response => {
+//                         // 如果有效，则转向主页面
+//                         if (true) {
+//                             next("/")
+//                         }
+//                         // 如果无效，则进入login界面，且丢弃当前access_token
+//                         else {
+//                             localStorage.removeItem("access_token");
+//                             next()
+//                         }
+//                     },
+//                     error => {
 
-                    }
-                )
-            }
-        }
-        else if (to.fullPath === "/administrator") {
-            next("/administrator/open-setting")
-        }
-        else {
-            next()
-        }
-    }
-})
+//                     }
+//                 )
+//             }
+//         }
+//         else if (to.fullPath === "/administrator") {
+//             next("/administrator/open-setting")
+//         }
+//         else {
+//             next()
+//         }
+//     }
+// })
 
 export default router

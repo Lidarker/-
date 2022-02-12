@@ -93,12 +93,21 @@ export default {
   methods: {
     onUserLoginSubmit() {
       // console.log(this.userForm);
-      axios.get("https://api.github.com/search/users?q=querryton").then(
+      axios.get("http://localhost:8081/login",{
+        params:{
+          userName:this.userForm.userName,
+          password:this.userForm.password
+        }
+      }).then(
         (response) => {
           console.log(response.data);
-          localStorage.setItem("access_token", "123");
-          this.$store.commit("UPDATE_TOKEN")
-          this.routerPush('/')
+          // localStorage.setItem("access_token", "123");
+          // this.$store.commit("UPDATE_TOKEN")
+          if(response.data){
+            this.routerPush('/')
+          }else{
+            window.alert('账号或密码错误')
+          }
         },
         (error) => {
           console.log(error.message);
@@ -107,12 +116,22 @@ export default {
     },
     onAdministratorLoginSubmit() {
       // console.log(this.administratorForm);
-      axios.get("https://api.github.com/search/users?q=querryton").then(
+      axios.get("http://localhost:8081/AdminLogin",{
+        params:{
+          userName:this.administratorForm.userName,
+          password:this.administratorForm.password
+        }
+      }
+      ).then(
         (response) => {
           console.log(response.data);
-          localStorage.setItem("admin_access_token", "123");
-          this.$store.commit("UPDATE_TOKEN")
-          this.routerPush('/administrator')
+          // localStorage.setItem("admin_access_token", "123");
+          // this.$store.commit("UPDATE_TOKEN")
+          if(response.data){
+            this.routerPush('/administrator')
+          }else{
+            window.alert('账号或密码错误')
+          }
         },
         (error) => {
           console.log(error.message);
