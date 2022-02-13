@@ -196,6 +196,16 @@ export default {
     };
   },
   methods: {
+    beforeCreate() {
+      console.log("1111");
+    },
+    created() {
+      console.log("1111");
+      console.log("@", sessionStorage.getItem("access_token"));
+    },
+    mounted() {
+            console.log("1111");
+    },
     handleEdit(index, row) {
       console.log(index, row);
     },

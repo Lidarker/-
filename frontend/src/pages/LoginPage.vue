@@ -93,50 +93,53 @@ export default {
   methods: {
     onUserLoginSubmit() {
       // console.log(this.userForm);
-      axios.get("http://localhost:8081/user/login",{
-        params:{
-          userName:this.userForm.userName,
-          password:this.userForm.password
-        }
-      }).then(
-        (response) => {
-          console.log(response.data);
-          // localStorage.setItem("access_token", "123");
-          // this.$store.commit("UPDATE_TOKEN")
-          if(response.data){
-            this.routerPush('/')
-          }else{
-            window.alert('账号或密码错误')
+      axios
+        .get("http://localhost:8081/user/login", {
+          params: {
+            userName: this.userForm.userName,
+            password: this.userForm.password,
+          },
+        })
+        .then(
+          (response) => {
+            console.log(response.data);
+            if (response.data) {
+              sessionStorage.setItem("access_token", this.userForm.userName);
+              this.$store.commit("UPDATE_TOKEN");
+              this.routerPush("/");
+            } else {
+              window.alert("账号或密码错误");
+            }
+          },
+          (error) => {
+            console.log(error.message);
           }
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
+        );
     },
     onAdministratorLoginSubmit() {
       // console.log(this.administratorForm);
-      axios.get("http://localhost:8081/user/AdminLogin",{
-        params:{
-          userName:this.administratorForm.userName,
-          password:this.administratorForm.password
-        }
-      }
-      ).then(
-        (response) => {
-          console.log(response.data);
-          // localStorage.setItem("admin_access_token", "123");
-          // this.$store.commit("UPDATE_TOKEN")
-          if(response.data){
-            this.routerPush('/administrator')
-          }else{
-            window.alert('账号或密码错误')
+      axios
+        .get("http://localhost:8081/user/AdminLogin", {
+          params: {
+            userName: this.administratorForm.userName,
+            password: this.administratorForm.password,
+          },
+        })
+        .then(
+          (response) => {
+            console.log(response.data);
+            if (response.data) {
+              this.routerPush("/administrator");
+              sessionStorage.setItem("admin_access_token", this.administratorForm.userName);
+              this.$store.commit("UPDATE_TOKEN")
+            } else {
+              window.alert("账号或密码错误");
+            }
+          },
+          (error) => {
+            console.log(error.message);
           }
-        },
-        (error) => {
-          console.log(error.message);
-        }
-      );
+        );
     },
     routerPush(to) {
       this.$router.push(to);

@@ -11,14 +11,14 @@ const actions = {
 
 const mutations = {
     UPDATE_TOKEN(state) {
-        state.access_token = localStorage.getItem("access_token")
-        state.admin_access_token = localStorage.getItem("admin_access_token")
+        state.access_token = sessionStorage.getItem("access_token")
+        state.admin_access_token = sessionStorage.getItem("admin_access_token")
     }
 }
 
 const state = {
-    access_token: localStorage.getItem("access_token"),
-    admin_access_token: localStorage.getItem("admin_access_token")
+    access_token: sessionStorage.getItem("access_token"),
+    admin_access_token: sessionStorage.getItem("admin_access_token")
 }
 
 export default new Vuex.Store({

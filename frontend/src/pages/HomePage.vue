@@ -15,6 +15,7 @@ import HouseTable from "../components/HouseTable.vue";
 export default {
   data(){
     return {
+      
     }
   },
   components: {

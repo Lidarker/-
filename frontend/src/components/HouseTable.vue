@@ -1,12 +1,16 @@
 <template>
-  <el-table :data="tableData" style="width: 100%" @row-click="handleClick" class="house-table">
+  <el-table
+    :data="tableData"
+    style="width: 100%"
+    @row-click="handleClick"
+    class="house-table"
+  >
     <el-table-column label="房屋图片" width="280">
       <template slot-scope="scope">
         <img
           style="width: 100px; height: 100px"
-          :src="'/static/img/'+scope.row.rimage"
-        >
-        </img>
+          :src="'/static/img/' + scope.row.rimage"
+        />
       </template>
     </el-table-column>
     <el-table-column label="房屋简介">
@@ -32,18 +36,16 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   data() {
     return {
-      tableData: [
-      
-      ],
+      tableData: [],
     };
   },
   methods: {
-    handleClick(){
-      this.$router.push('/house-detail');
+    handleClick() {
+      this.$router.push("/house-detail");
     },
     handleEdit(index, row) {
       console.log(index, row);
@@ -52,19 +54,18 @@ export default {
       console.log(index, row);
     },
   },
-  created(){
-  axios.get("http://localhost:8081/getAllRoom")
-  .then((Response)=>{
-    console.log("数据",Response.data);
-    console.log(this.tableData);
-    this.tableData=Response.data;
-  })
-  }
+  created() {
+    axios.get("http://localhost:8081/getAllRoom").then((Response) => {
+      console.log("数据", Response.data);
+      console.log(this.tableData);
+      this.tableData = Response.data;
+    });
+  },
 };
 </script>
 
 <style>
-.house-table .el-table__row{
+.house-table .el-table__row {
   cursor: pointer;
-} 
+}
 </style>
