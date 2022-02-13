@@ -53,6 +53,9 @@ export default {
     handleDelete(index, row) {
       console.log(index, row);
     },
+    getData(value){
+      this.tableData=value;
+    }
   },
   created() {
     axios.get("http://localhost:8081/getAllRoom").then((Response) => {
@@ -61,6 +64,12 @@ export default {
       this.tableData = Response.data;
     });
   },
+  mounted(){
+    this.$bus.$on("getData",this.getData);
+  },
+  beforedestory(){
+    this.$off('getData');
+  }
 };
 </script>
 
