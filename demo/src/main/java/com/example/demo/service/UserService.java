@@ -11,4 +11,6 @@ public interface UserService {
     String changePassword(String phone,String userName,String password);
     List<User> findAllUser(boolean isAdmin);
     boolean deleteById(int uid);
+    User findByAccount(String userName);
+    User findById(int uid);
 }
