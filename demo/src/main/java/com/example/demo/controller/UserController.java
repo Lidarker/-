@@ -48,5 +48,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "delete",method = RequestMethod.GET)
-    public boolean delete(@RequestParam("uid") int uid){return userService.deleteById(uid);}
+    public boolean delete(@RequestParam("uid") int uid){
+        return userService.deleteById(uid);}
+
+    @RequestMapping(value = "findById",method = RequestMethod.GET)
+    public User findById(@RequestParam("uid") int uid){
+        return userService.findById(uid);}
+
+    @RequestMapping(value = "findByAccount",method = RequestMethod.GET)
+    public User findByAccount(@RequestParam("userName") String userName){
+        return userService.findByAccount(userName);
+    }
 }

@@ -87,4 +87,17 @@ public class UserServiceImpl implements UserService {
         return userMapper.deleteByPrimaryKey(uid)==1;
     }
 
+    @Override
+    public User findByAccount(String userName) {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andAccountEqualTo(userName);
+        return userMapper.selectByExample(userExample).get(0);
+    }
+
+    @Override
+    public User findById(int uid) {
+        return userMapper.selectByPrimaryKey(uid);
+    }
+
 }
