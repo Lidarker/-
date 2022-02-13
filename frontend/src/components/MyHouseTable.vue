@@ -196,16 +196,6 @@ export default {
     };
   },
   methods: {
-    beforeCreate() {
-      console.log("1111");
-    },
-    created() {
-      console.log("1111");
-      console.log("@", sessionStorage.getItem("access_token"));
-    },
-    mounted() {
-            console.log("1111");
-    },
     handleEdit(index, row) {
       console.log(index, row);
     },
@@ -274,6 +264,10 @@ export default {
         }
       });
     },
+  },
+  created() {
+    // sessionStorage.getItem("access_token") 可以取出当前登录的用户的用户名
+    console.log("@", sessionStorage.getItem("access_token"));
   },
 };
 </script>
