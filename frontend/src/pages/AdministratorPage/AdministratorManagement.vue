@@ -159,7 +159,7 @@ export default {
   methods:{
     handleDelete(index,row){
       console.log(row.uid);
-      axios.get("http://localhost:8081/user/delete",{
+      axios.get("http://172.19.241.36:8081/user/delete",{
         params:{
           uid:row.uid
         }
@@ -176,7 +176,7 @@ export default {
     },
   },
   created(){
-    axios.get("http://localhost:8081/user/findAll",{
+    axios.get("http://172.19.241.36:8081/user/findAll",{
       params:{
         isAdmin:true
       }
