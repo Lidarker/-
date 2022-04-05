@@ -2,7 +2,7 @@
   <div class="detail-info">
     <el-page-header @back="goBack" content="详情页面"> </el-page-header>
     <div class="static-detail-info">
-      <h2>{{room.raddress}}&nbsp;{{room.rtype}}</h2>
+      <h2>{{ room.raddress }}&nbsp;{{ room.rtype }}</h2>
       <el-divider></el-divider>
       <el-carousel
         height="300px"
@@ -15,7 +15,7 @@
         >
           <img
             style="height: 100%"
-            :src="'/static/img/'+room.rimage"
+            :src="'/static/img/' + room.rimage"
             fit="fill"
           />
         </el-carousel-item>
@@ -23,15 +23,17 @@
 
       <div style="width: 55%; display: inline-block; vertical-align: top">
         <div style="width: 63.7%; display: inline-block; vertical-align: top">
-          <div style="color: #d8703f; font-size: 36px">{{room.rprice}}&nbsp;元/月</div>
-          <div style="padding: 5px; font-size: 18px; color: #999999">
-            房屋类型：{{room.rtype}}
+          <div style="color: #d8703f; font-size: 36px">
+            {{ room.rprice }}&nbsp;元/月
           </div>
           <div style="padding: 5px; font-size: 18px; color: #999999">
-            详细地址：{{room.raddress}}
+            房屋类型：{{ room.rtype }}
           </div>
           <div style="padding: 5px; font-size: 18px; color: #999999">
-            房屋描述：{{room.description}}
+            详细地址：{{ room.raddress }}
+          </div>
+          <div style="padding: 5px; font-size: 18px; color: #999999">
+            房屋描述：{{ room.description }}
           </div>
           <div style="padding: 5px; font-size: 18px; color: #999999">
             <el-button
@@ -58,9 +60,15 @@
               src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
             ></el-avatar>
           </div>
+<<<<<<< HEAD
           <div style="margin-top: 15x; margin-bottom: 15px;">
             {{user.account}}
             <span style="color: orange; font-size: 12px">（已认证）</span>
+=======
+          <div style="margin-top: 15x; margin-bottom: 15px">
+            gggg
+            <span style="color: orange; font-size: 12px">（未认证）</span>
+>>>>>>> 0cf93814399254d4485c6d6f2e63ec67f94b9d16
           </div>
           <el-button
             type="primary"
@@ -79,10 +87,7 @@
         添加评论
       </el-button>
     </div>
-    <div id="all">
-      <div v-for="count in 4" :key="count">这是一条评论</div>
-    </div>
-
+    <CommentTable :id="'comment-table'" />
     <el-dialog
       title="给房东留言"
       :visible.sync="leaveMessageVisible"
@@ -138,7 +143,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+import CommentTable from "../components/CommentTable";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -149,6 +155,7 @@ export default {
       complaintContent: "",
       commentContent: "",
       roomId: "",
+<<<<<<< HEAD
       room:{
         rid: '',
         rtype: '',
@@ -161,7 +168,21 @@ export default {
       user:{
         account:"",
       }
+=======
+      room: {
+        rid: "",
+        rtype: "",
+        raddress: "",
+        rprice: "",
+        description: "",
+        rimage: "",
+        certificateid: "",
+      },
+>>>>>>> 0cf93814399254d4485c6d6f2e63ec67f94b9d16
     };
+  },
+  components: {
+    CommentTable,
   },
   methods: {
     collect() {
@@ -169,9 +190,10 @@ export default {
     },
     goBack() {
       console.log(this.$router);
-      this.$router.back()
+      this.$router.back();
     },
   },
+<<<<<<< HEAD
   created(){
     this.roomId=this.$route.query.id;
       axios.get("http://localhost:8081/room/getRoom",{params:{id:this.roomId}}).then((Response) => {
@@ -182,12 +204,23 @@ export default {
       console.log("数据", Response.data);
       this.user=Response.data;
     });
+=======
+  created() {
+    this.roomId = this.$route.query.id;
+    axios
+      .get("http://localhost:8081/getRoom", { params: { id: this.roomId } })
+      .then((Response) => {
+        console.log("数据", Response.data);
+        this.room = Response.data;
+      });
+>>>>>>> 0cf93814399254d4485c6d6f2e63ec67f94b9d16
   },
-  mounted(){
-  
-  }
+  mounted() {},
 };
 </script>
 
 <style>
+#comment-table {
+  margin-top: 20px;
+}
 </style>
