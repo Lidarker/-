@@ -1,12 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.bean.Collect;
-import com.example.demo.bean.Room;
-import com.example.demo.bean.RoomAndUser;
-import com.example.demo.bean.User;
+import com.example.demo.bean.*;
 import com.example.demo.service.CollectionService;
+import com.example.demo.service.CommentService;
 import com.example.demo.service.RoomService;
 import com.example.demo.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +22,8 @@ public class DetailController {
     private UserService userService;
     @Autowired
     private RoomService roomService;
+    @Autowired
+    private CommentService commentService;
     @RequestMapping(value = "/getOwner",method = RequestMethod.GET)
     public User getOwnerByRoomId(@RequestParam("rid")int rid){
         List<Collect> collects=collectionService.getCollectionByRoomId(rid);
@@ -49,5 +50,14 @@ public class DetailController {
             rooms.add(room);
         }
         return rooms;
+    }
+    @RequestMapping(value="/getCommentByRoomId",method = RequestMethod.GET)
+    public List<CommentAndUser> getCommentByRoomId(@RequestParam("rid")int id){
+        List<Comment>comments=commentService.getCommentByRoomId(id);
+        List<CommentAndUser>commentAndUsers=new ArrayList<>();
+        for(Comment comment:comments){
+            commentAndUsers.add(new CommentAndUser(comment,userService.findById(comment.getUid())));
+        }
+        return commentAndUsers;
     }
 }
