@@ -69,7 +69,7 @@ export default {
     }
   },
   created() {
-    axios.get("http://172.19.241.36:8081/getAllRoom").then((Response) => {
+    axios.get("http://localhost:8081/room/getAllRoom").then((Response) => {
       console.log("数据", Response.data);
       console.log(this.tableData);
       this.tableData = Response.data;

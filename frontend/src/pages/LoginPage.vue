@@ -94,7 +94,7 @@ export default {
     onUserLoginSubmit() {
       // console.log(this.userForm);
       axios
-        .get("http://172.19.241.36:8081/user/login", {
+        .get("http://localhost:8081/user/login", {
           params: {
             userName: this.userForm.userName,
             password: this.userForm.password,
@@ -119,7 +119,7 @@ export default {
     onAdministratorLoginSubmit() {
       // console.log(this.administratorForm);
       axios
-        .get("http://172.19.241.36:8081/user/AdminLogin", {
+        .get("http://localhost:8081/user/AdminLogin", {
           params: {
             userName: this.administratorForm.userName,
             password: this.administratorForm.password,

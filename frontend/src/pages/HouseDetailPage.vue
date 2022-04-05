@@ -59,8 +59,8 @@
             ></el-avatar>
           </div>
           <div style="margin-top: 15x; margin-bottom: 15px;">
-            gggg
-            <span style="color: orange; font-size: 12px">（未认证）</span>
+            {{user.account}}
+            <span style="color: orange; font-size: 12px">（已认证）</span>
           </div>
           <el-button
             type="primary"
@@ -157,6 +157,9 @@ export default {
         description: '',
         rimage: '',
         certificateid: ''
+      },
+      user:{
+        account:"",
       }
     };
   },
@@ -171,9 +174,13 @@ export default {
   },
   created(){
     this.roomId=this.$route.query.id;
-      axios.get("http://localhost:8081/getRoom",{params:{id:this.roomId}}).then((Response) => {
+      axios.get("http://localhost:8081/room/getRoom",{params:{id:this.roomId}}).then((Response) => {
       console.log("数据", Response.data);
       this.room=Response.data;
+    });
+     axios.get("http://localhost:8081/getOwner",{params:{rid:this.roomId}}).then((Response) => {
+      console.log("数据", Response.data);
+      this.user=Response.data;
     });
   },
   mounted(){

@@ -116,7 +116,7 @@ export default {
     },
   },
   created(){
-    axios.get("http://172.19.241.36:8081/user/findAll",{
+    axios.get("http://localhost:8081/user/findAll",{
       params:{
         isAdmin:false
       }

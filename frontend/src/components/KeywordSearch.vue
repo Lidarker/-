@@ -49,11 +49,11 @@ export default {
     searchCity(key){
       if(key==null)
       {
-        axios.get("http://172.19.241.36:8081/getAllRoom").then((Response)=>{
+        axios.get("http://localhost:8081/room/getAllRoom").then((Response)=>{
           this.$bus.$emit('getData',Response.data)
         });
       }else{
-        axios.get("http://172.19.241.36:8081/getRoom",{params:{city:key}}).then((Response)=>{
+        axios.get("http://localhost:8081/room/getRoom",{params:{city:key}}).then((Response)=>{
         this.$bus.$emit('getData',Response.data)
         });
       }
@@ -61,11 +61,11 @@ export default {
     searchMoney(key1,key2){
        if(key1==null)
       {
-        axios.get("http://172.19.241.36:8081/getAllRoom").then((Response)=>{
+        axios.get("http://localhost:8081/room/getAllRoom").then((Response)=>{
           this.$bus.$emit('getData',Response.data)
         });
       }else{
-        axios.get("http://172.19.241.36:8081/getRoom",{params:{lowmoney:key1,highmoney:key2}}).then((Response)=>{
+        axios.get("http://localhost:8081/room/getRoom",{params:{lowmoney:key1,highmoney:key2}}).then((Response)=>{
         this.$bus.$emit('getData',Response.data)
         });
       }
@@ -73,11 +73,11 @@ export default {
     searchType(key){
        if(key==null)
       {
-        axios.get("http://172.19.241.36:8081/getAllRoom").then((Response)=>{
+        axios.get("http://localhost:8081/room/getAllRoom").then((Response)=>{
           this.$bus.$emit('getData',Response.data)
         });
       }else{
-        axios.get("http://172.19.241.36:8081/getRoom",{params:{type:key}}).then((Response)=>{
+        axios.get("http://localhost:8081/room/getRoom",{params:{type:key}}).then((Response)=>{
         this.$bus.$emit('getData',Response.data)
         });
       }

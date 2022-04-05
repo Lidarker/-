@@ -15,37 +15,37 @@
     <el-table :data="tableData" style="width: 100%">
       <el-table-column label="ID" width="160">
         <template slot-scope="scope">
-          <span style="margin-left: 5px">{{ scope.row.rid }}</span>
+          <span style="margin-left: 5px">{{ scope.row.room.rid }}</span>
         </template>
       </el-table-column>
       <el-table-column label="类型" width="160">
         <template slot-scope="scope">
-          {{ scope.row.rtype }}
+          {{ scope.row.room.rtype }}
         </template>
       </el-table-column>
       <el-table-column label="房东ID" width="160">
         <template slot-scope="scope">
-          {{ scope.row.certificateid }}
+          {{ scope.row.user.account }}
         </template>
       </el-table-column>
       <el-table-column label="房产证号" width="160">
         <template slot-scope="scope">
-          {{ scope.row.certificateid }}
+          {{ scope.row.room.certificateid }}
         </template>
       </el-table-column>
       <el-table-column label="地址" width="160">
         <template slot-scope="scope">
-          {{ scope.row.raddress }}
+          {{ scope.row.room.raddress }}
         </template>
       </el-table-column>
       <el-table-column label="价格（元/月）" width="160">
         <template slot-scope="scope">
-          {{ scope.row.rprice }}
+          {{ scope.row.room.rprice }}
         </template>
       </el-table-column>
       <el-table-column label="图片" width="160">
         <template slot-scope="scope">
-          {{ scope.row.rimage }}
+          {{ scope.row.room.rimage }}
         </template>
       </el-table-column>
       <el-table-column label="删除" width="160">
@@ -82,13 +82,18 @@ export default {
       ],
       tableData: [
          {
-          rid: '',
-          rtype: '',
-          raddress: '',
-          rprice: '',
-          description: '',
-          rimage: '',
-          certificateid: ''
+          room:{
+            rid: '',
+            rtype: '',
+            raddress: '',
+            rprice: '',
+            description: '',
+            rimage: '',
+            certificateid: ''
+          },
+          user:{
+            account:"",
+          }
         }
       ],
       selectValue: "ID",
@@ -101,7 +106,7 @@ export default {
     },
   },
   created(){
-    axios.get("http://localhost:8081/getAllRoom").then((Response) => {
+    axios.get("http://localhost:8081/getRoomAndUser").then((Response) => {
       console.log("数据", Response.data);
       console.log(this.tableData);
       this.tableData = Response.data;
