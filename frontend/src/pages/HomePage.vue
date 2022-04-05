@@ -3,7 +3,7 @@
     <PageHeader v-if="!$store.state.access_token"/>
     <TopMenu activeIndex="/"/>
     <KeywordSearch />
-    <HouseTable />
+    <HouseTable id="house-table"/>
   </div>
 </template>
 
@@ -28,4 +28,9 @@ export default {
 </script>
 
 <style>
+#house-table {
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 15px;
+}
 </style>
