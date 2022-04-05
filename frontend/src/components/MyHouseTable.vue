@@ -237,22 +237,23 @@ export default {
       this.$refs["houseForm"].validate((valid) => {
         if (valid) {
           this.uploadVisible = false;
+          console.log(this.fileList)
+          console.log(this.fileList[0].raw)
+          console.log("submit!")
           // this.$refs.upload.submit();
-          alert("submit!");
           return true;
         } else {
           console.log("error submit!!");
           return false;
         }
       });
-      console.log("end")
     },
     submitEditForm() {
       this.$refs["editForm"].validate((valid) => {
         if (valid) {
           this.editVisible = false;
+          console.log("submit!")
           // this.$refs.upload.submit();
-          alert("submit!");
         } else {
           console.log("error submit!!");
           return false;
