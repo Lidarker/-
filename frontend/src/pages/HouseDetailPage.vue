@@ -60,15 +60,9 @@
               src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
             ></el-avatar>
           </div>
-<<<<<<< HEAD
           <div style="margin-top: 15x; margin-bottom: 15px;">
             {{user.account}}
             <span style="color: orange; font-size: 12px">（已认证）</span>
-=======
-          <div style="margin-top: 15x; margin-bottom: 15px">
-            gggg
-            <span style="color: orange; font-size: 12px">（未认证）</span>
->>>>>>> 0cf93814399254d4485c6d6f2e63ec67f94b9d16
           </div>
           <el-button
             type="primary"
@@ -155,7 +149,6 @@ export default {
       complaintContent: "",
       commentContent: "",
       roomId: "",
-<<<<<<< HEAD
       room:{
         rid: '',
         rtype: '',
@@ -168,17 +161,6 @@ export default {
       user:{
         account:"",
       }
-=======
-      room: {
-        rid: "",
-        rtype: "",
-        raddress: "",
-        rprice: "",
-        description: "",
-        rimage: "",
-        certificateid: "",
-      },
->>>>>>> 0cf93814399254d4485c6d6f2e63ec67f94b9d16
     };
   },
   components: {
@@ -193,7 +175,6 @@ export default {
       this.$router.back();
     },
   },
-<<<<<<< HEAD
   created(){
     this.roomId=this.$route.query.id;
       axios.get("http://localhost:8081/room/getRoom",{params:{id:this.roomId}}).then((Response) => {
@@ -204,16 +185,6 @@ export default {
       console.log("数据", Response.data);
       this.user=Response.data;
     });
-=======
-  created() {
-    this.roomId = this.$route.query.id;
-    axios
-      .get("http://localhost:8081/getRoom", { params: { id: this.roomId } })
-      .then((Response) => {
-        console.log("数据", Response.data);
-        this.room = Response.data;
-      });
->>>>>>> 0cf93814399254d4485c6d6f2e63ec67f94b9d16
   },
   mounted() {},
 };
