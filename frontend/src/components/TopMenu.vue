@@ -86,7 +86,8 @@ export default {
     },
     handleAvatarItemClick(command) {
       if (command === "logout") {
-        localStorage.removeItem("access_token");
+        //localStorage.removeItem("access_token");
+        sessionStorage.removeItem("access_token");
         this.$store.commit("UPDATE_TOKEN")
         this.routerPush("/");
       }
