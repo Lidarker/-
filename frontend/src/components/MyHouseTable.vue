@@ -118,7 +118,7 @@
               >选取文件</el-button
             >
             <div slot="tip" class="el-upload__tip">
-              只能上传jpg/png文件，且不超过500kb
+              只能上传jpg文件，且不超过500kb
             </div>
           </el-upload>
         </el-form-item>
@@ -146,6 +146,7 @@ export default {
       if (this.fileList.length == 0) {
         return callback(new Error("请上传房子图片"));
       }
+      return callback();
     };
     return {
       editVisible: false,
@@ -238,11 +239,13 @@ export default {
           this.uploadVisible = false;
           // this.$refs.upload.submit();
           alert("submit!");
+          return true;
         } else {
           console.log("error submit!!");
           return false;
         }
       });
+      console.log("end")
     },
     submitEditForm() {
       this.$refs["editForm"].validate((valid) => {
