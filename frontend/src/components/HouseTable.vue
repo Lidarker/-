@@ -40,12 +40,23 @@ import axios from "axios";
 export default {
   data() {
     return {
-      tableData: [],
+      tableData: [
+        {
+          rid: '',
+          rtype: '',
+          raddress: '',
+          rprice: '',
+          description: '',
+          rimage: '',
+          certificateid: ''
+        }
+      ],
     };
   },
   methods: {
-    handleClick() {
-      this.$router.push("/house-detail");
+    handleClick(row,column) {
+      console.log(row.rid)
+      this.$router.push({path:'/house-detail', query:{id:row.rid}});
     },
     handleEdit(index, row) {
       console.log(index, row);
@@ -53,14 +64,23 @@ export default {
     handleDelete(index, row) {
       console.log(index, row);
     },
+    getData(value){
+      this.tableData=value;
+    }
   },
   created() {
-    axios.get("http://localhost:8081/getAllRoom").then((Response) => {
+    axios.get("http://172.19.241.36:8081/getAllRoom").then((Response) => {
       console.log("数据", Response.data);
       console.log(this.tableData);
       this.tableData = Response.data;
     });
   },
+  mounted(){
+    this.$bus.$on("getData",this.getData);
+  },
+  beforedestory(){
+    this.$off('getData');
+  }
 };
 </script>
 

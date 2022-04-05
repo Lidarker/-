@@ -10,11 +10,11 @@ import java.util.List;
 
 @RequestMapping("")
 @RestController
+@CrossOrigin
 public class RoomController {
     @Autowired
     private RoomService roomService;
     @RequestMapping(value = "/getAllRoom",method = RequestMethod.GET)
-    @CrossOrigin
     public List<Room>getAllRoom(){return roomService.findAllRoom();}
     @RequestMapping(value = "/getRoom",params = {"city"},method = RequestMethod.GET)
     public List<Room>getRoomByCity(@RequestParam("city")String city)

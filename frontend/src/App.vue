@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="div-root">
     <router-view></router-view>
   </div>
 </template>
@@ -14,5 +14,8 @@ export default {
 <style>
 #app {
   height: 100%;
+}
+#div-root {
+  margin: 30px 100px;
 }
 </style>

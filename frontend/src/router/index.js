@@ -18,6 +18,7 @@ import axios from "axios"
 
 const router = new VueRouter({
     mode: 'history',
+    
     routes: [
         {
             path: '',

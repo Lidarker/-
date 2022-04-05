@@ -87,5 +87,8 @@ Vue.prototype.$message = Message
 new Vue({
   render: h => h(App),
   store,
-  router
+  router,
+  beforeCreate(){
+    Vue.prototype.$bus=this
+  }
 }).$mount('#app')

@@ -40,7 +40,7 @@
         v-model="searchInput"
         class="input-with-select"
       >
-        <el-button slot="append" icon="el-icon-search"></el-button>
+        <el-button @click="searchWord" slot="append" icon="el-icon-search"></el-button>
       </el-input>
     </el-col>
     <el-col
@@ -72,6 +72,7 @@
 </template>
 
 <script>
+ import axios from 'axios';
 export default {
   data() {
     return {
@@ -85,7 +86,7 @@ export default {
     },
     handleAvatarItemClick(command) {
       if (command === "logout") {
-        // localStorage.removeItem("access_token");
+        //localStorage.removeItem("access_token");
         sessionStorage.removeItem("access_token");
         this.$store.commit("UPDATE_TOKEN")
         this.routerPush("/");
@@ -97,6 +98,18 @@ export default {
     routerPush(to) {
       this.$router.push(to);
     },
+    searchWord(){
+       if(this.searchInput==null)
+      {
+        axios.get("http://localhost:8081/getAllRoom").then((Response)=>{
+          this.$bus.$emit('getData',Response.data)
+        });
+      }else{
+        axios.get("http://localhost:8081/getRoom",{params:{word:this.searchInput}}).then((Response)=>{
+        this.$bus.$emit('getData',Response.data)
+        });
+      }
+    }
   },
 };
 </script>
