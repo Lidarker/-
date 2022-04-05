@@ -40,12 +40,23 @@ import axios from "axios";
 export default {
   data() {
     return {
-      tableData: [],
+      tableData: [
+        {
+          rid: '',
+          rtype: '',
+          raddress: '',
+          rprice: '',
+          description: '',
+          rimage: '',
+          certificateid: ''
+        }
+      ],
     };
   },
   methods: {
-    handleClick() {
-      this.$router.push("/house-detail");
+    handleClick(row,column) {
+      console.log(row.rid)
+      this.$router.push({path:'/house-detail', query:{id:row.rid}});
     },
     handleEdit(index, row) {
       console.log(index, row);

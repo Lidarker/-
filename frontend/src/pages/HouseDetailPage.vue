@@ -2,39 +2,36 @@
   <div class="detail-info">
     <el-page-header @back="goBack" content="详情页面"> </el-page-header>
     <div class="static-detail-info">
-      <h2>佳木斯&nbsp;二室一厅</h2>
+      <h2>{{room.raddress}}&nbsp;{{room.rtype}}</h2>
       <el-divider></el-divider>
       <el-carousel
         height="300px"
         style="width: 40%; display: inline-block; vertical-align: top"
       >
         <el-carousel-item
-          v-for="item in 4"
+          v-for="item in 1"
           :key="item"
           style="text-align: center"
         >
-          <el-image
+          <img
             style="height: 100%"
-            src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+            :src="'/static/img/'+room.rimage"
             fit="fill"
-          ></el-image>
+          />
         </el-carousel-item>
       </el-carousel>
 
       <div style="width: 55%; display: inline-block; vertical-align: top">
         <div style="width: 63.7%; display: inline-block; vertical-align: top">
-          <div style="color: #d8703f; font-size: 36px">2000&nbsp;元/月</div>
+          <div style="color: #d8703f; font-size: 36px">{{room.rprice}}&nbsp;元/月</div>
           <div style="padding: 5px; font-size: 18px; color: #999999">
-            房屋类型：二室一厅
+            房屋类型：{{room.rtype}}
           </div>
           <div style="padding: 5px; font-size: 18px; color: #999999">
-            详细地址：佳木斯
+            详细地址：{{room.raddress}}
           </div>
           <div style="padding: 5px; font-size: 18px; color: #999999">
-            房屋优势：有暖气
-          </div>
-          <div style="padding: 5px; font-size: 18px; color: #999999">
-            房屋描述：佳木斯二室一厅2000有暖气
+            房屋描述：{{room.description}}
           </div>
           <div style="padding: 5px; font-size: 18px; color: #999999">
             <el-button
@@ -141,6 +138,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -150,6 +148,16 @@ export default {
       leaveMessageContent: "",
       complaintContent: "",
       commentContent: "",
+      roomId: "",
+      room:{
+        rid: '',
+        rtype: '',
+        raddress: '',
+        rprice: '',
+        description: '',
+        rimage: '',
+        certificateid: ''
+      }
     };
   },
   methods: {
@@ -161,6 +169,16 @@ export default {
       this.$router.back()
     },
   },
+  created(){
+    this.roomId=this.$route.query.id;
+      axios.get("http://localhost:8081/getRoom",{params:{id:this.roomId}}).then((Response) => {
+      console.log("数据", Response.data);
+      this.room=Response.data;
+    });
+  },
+  mounted(){
+  
+  }
 };
 </script>
 
