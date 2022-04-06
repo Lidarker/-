@@ -7,8 +7,8 @@
             <div>{{ item.comment.detail }}</div>
             <div class="comment-time">
               {{
-                item.comment.time.length != 0
-                  ? (item.comment.time | datetimeFormater)
+                (item.comment.time.length != 0)
+                  ? datetimeFormater(item.comment.time)
                   : ""
               }}
             </div>
@@ -56,8 +56,6 @@ export default {
           this.commentData = Response.data;
         });
     },
-  },
-  filters: {
     datetimeFormater(dateStr, pattern = "YYYY-MM-DD HH:mm:ss") {
       return moment(dateStr).format(pattern);
     },
