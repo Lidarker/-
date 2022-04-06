@@ -5,14 +5,14 @@
       <el-form ref="form" :model="form">
         <el-form-item>
           <el-input
-            v-model="form.email"
-            placeholder="邮箱"
+            v-model="form.phone"
+            placeholder="手机号"
             prefix-icon="aliiconfont al-iconyouxiang"
           ></el-input>
         </el-form-item>
         <el-form-item>
           <el-input
-            v-model="form.userName"
+            v-model="form.account"
             placeholder="账户"
             prefix-icon="el-icon-user-solid"
           ></el-input>
@@ -45,13 +45,13 @@
 
 <script>
 import CommonTop from "../components/CommonTop";
-
+import axios from "axios";
 export default {
   data() {
     return {
       form: {
-        email: "",
-        userName: "",
+        phone: "",
+        account: "",
         password: "",
         repeatPassword: "",
       },
@@ -59,7 +59,21 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(this.form);
+       axios
+       .get("http://localhost:8081/user/register",{
+        params:{
+        phone:this.form.phone,
+        userName:this.form.account,
+        password:this.form.password,
+        },
+      }).
+      then((Response) => {
+      console.log("数据", Response.data);
+      alert(Response.data);
+      if(Response.data=="注册成功"){
+        this.$router.push({path:'/login'});
+      }
+    });
     },
   },
   components: {
