@@ -4,6 +4,7 @@ import LoginPage from "../pages/LoginPage"
 import ForgetPasswordPage from "../pages/ForgetPasswordPage"
 import RegisterPage from "../pages/RegisterPage"
 import HouseDetailPage from "../pages/HouseDetailPage"
+import CollectionPage from "../pages/CollectionPage"
 import MyHousePage from "../pages/MyHousePage"
 import UserSettingPage from "../pages/UserSettingPage"
 import AdministratorPage from "../pages/AdministratorPage"
@@ -38,6 +39,13 @@ const router = new VueRouter({
         {
             path: '/house-detail',
             component: HouseDetailPage
+        },
+        {
+            path: '/collection',
+            component: CollectionPage,
+            meta: {
+                requireUserAuth: true,
+            }
         },
         {
             path: '/my-house',

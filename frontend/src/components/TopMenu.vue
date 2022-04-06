@@ -22,7 +22,7 @@
         router
       >
         <el-menu-item index="/">主页</el-menu-item>
-        <el-menu-item index="2" disabled>收藏</el-menu-item>
+        <el-menu-item index="/collection">收藏</el-menu-item>
         <el-menu-item index="/my-house">我的房源</el-menu-item>
         <el-submenu index="4" disabled>
           <template slot="title">个人中心</template>
