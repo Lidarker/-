@@ -65,6 +65,7 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   data() {
     var validateFile = (rule, value, callback) => {
@@ -128,9 +129,9 @@ export default {
         if (valid) {
           this.uploadVisible = false;
           var forms = new FormData();
-          // JSON.parse(JSON.stringify(this.houseData)).keys(obj).forEach(function (key) {
-          //   forms.append(key, obj[key])
-          // });
+          for (var key in this.houseData) {
+            forms.append(key, this.houseData[key])
+          }
           forms.append("picture", this.fileList[0].raw);
           axios
             .post("http://localhost:8080/test/publish_house", forms, {
