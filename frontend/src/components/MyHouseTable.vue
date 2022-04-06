@@ -128,7 +128,6 @@ export default {
         ],
         picture: [{ required: true, validator: validateFile, trigger: "blur" }],
       },
-      account: {},
       editResult: "",
     };
   },
