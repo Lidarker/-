@@ -29,8 +29,11 @@
         </template>
       </el-table-column>
       <el-table-column label="操作" width="300">
-        <template> <!-- slot-scope="scope" -->
-          <el-button type="primary" size="mini" @click="handleEdit(scope.$index, scope.row)"
+        <template slot-scope="scope">
+          <el-button
+            type="primary"
+            size="mini"
+            @click="handleEdit(scope.$index, scope.row)"
             >编辑</el-button
           >
           <el-button type="danger" size="mini" @click="deleteHint">
@@ -95,7 +98,7 @@ export default {
         rtype: "",
         certificateid: "",
         description: "",
-        rid:"",
+        rid: "",
       },
       tableData: [
         {
@@ -121,15 +124,13 @@ export default {
         ],
         picture: [{ required: true, validator: validateFile, trigger: "blur" }],
       },
-      account:{
-
-      },
-      editResult:""
+      account: {},
+      editResult: "",
     };
   },
   methods: {
     handleEdit(index, row) {
-      this.editData.rid=row.rid;
+      this.editData.rid = row.rid;
       this.editVisible = true;
     },
     handleDelete(index, row) {
@@ -153,40 +154,54 @@ export default {
         if (valid) {
           this.editVisible = false;
           console.log("submit!");
-          console.log(this.editData)
-          axios.post("http://localhost:8081/room/updateRoom",this.editData).then(res=>{
-            console.log('res=>',res);  
-            this.editResult=res.data;
-            alert(this.editResult);
-          })
+          console.log(this.editData);
+          axios
+            .post("http://localhost:8081/room/updateRoom", this.editData)
+            .then((res) => {
+              console.log("res=>", res);
+              this.editResult = res.data;
+              alert(this.editResult);
+              this.changeData();
+            });
         } else {
           console.log("error submit!!");
           return false;
         }
-
-      });  
+      });
+     
     },
-},
+    changeData() {
+      axios
+        .get("http://localhost:8081/getRoomByAccount", {
+          params: { account: this.account },
+        })
+        .then((Response) => {
+          this.tableData = Response.data;
+        });
+      console.log("数据改变了");
+      this.$forceUpdate();
+    },
+  },
   created() {
     // sessionStorage.getItem("access_token") 可以取出当前登录的用户的用户名
     // console.log("@", sessionStorage.getItem("access_token"));
     this.account = sessionStorage.getItem("access_token");
   },
-  mounted(){
-     axios.get("http://localhost:8081/getRoomByAccount",
-     {
-       params:{account:this.account}}).
-      then((Response) => {
-      console.log("数据", Response.data);
-      console.log(this.tableData);
-      this.tableData = Response.data;
+  mounted() {
+    axios
+      .get("http://localhost:8081/getRoomByAccount", {
+        params: { account: this.account },
+      })
+      .then((Response) => {
+        console.log("数据", Response.data);
+        console.log(this.tableData);
+        this.tableData = Response.data;
+      });
+    this.$bus.$on("change", (val) => {
+      this.changeData();
     });
   },
-  updated(){
-    axios.get("http://localhost:8081/getRoomByAccount",{params:{account:this.account}}).then((Response) => {
-      this.tableData = Response.data;
-    });
-  }
+  updated() {},
 };
 </script>
 
