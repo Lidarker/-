@@ -140,9 +140,19 @@ public class Collect {
         this.time = time;
     }
 
+    public Collect() {
+    }
+
     public Collect(Integer uid, Integer rid) {
         this.uid = uid;
         this.rid = rid;
+    }
+
+    public Collect(Integer cid, Integer uid, Integer rid, Date time) {
+        this.cid = cid;
+        this.uid = uid;
+        this.rid = rid;
+        this.time = time;
     }
 
     @Override

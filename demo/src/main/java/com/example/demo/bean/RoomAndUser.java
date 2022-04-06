@@ -27,4 +27,12 @@ public class RoomAndUser {
         this.room = room;
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "com.example.demo.bean.RoomAndUser{" +
+                "room=" + room +
+                ", user=" + user +
+                '}';
+    }
 }

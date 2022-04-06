@@ -89,15 +89,15 @@ export default {
     this.account = sessionStorage.getItem("access_token");
   },
   mounted() {
-    // axios
-    //   .get("http://localhost:8081/getRoomByAccount", {
-    //     params: { account: this.account },
-    //   })
-    //   .then((Response) => {
-    //     console.log("数据", Response.data);
-    //     console.log(this.tableData);
-    //     this.tableData = Response.data;
-    //   });
+    axios
+      .get("http://localhost:8081/browse/getAllBrowse", {
+        params: { account: this.account },
+      })
+      .then((Response) => {
+        console.log("数据", Response.data);
+        console.log(this.tableData);
+        this.tableData = Response.data;
+      });
   },
   updated() {
     // axios

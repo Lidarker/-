@@ -179,7 +179,17 @@ export default {
   },
   methods: {
     collect() {
-      console.log("collect");
+      axios
+        .get("http://localhost:8081/browse/browseHouse", {
+          params: {
+            account: sessionStorage.getItem("access_token"),
+            rid: this.roomId,
+          },
+        })
+        .then((Response) => {
+          console.log("数据", Response.data);
+          alert(Response.data)
+        });
     },
     goBack() {
       console.log(this.$router);

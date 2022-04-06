@@ -139,4 +139,29 @@ public class Browse {
     public void setTime(Date time) {
         this.time = time;
     }
+
+    public Browse() {
+    }
+
+    public Browse(Integer uid, Integer sid) {
+        this.uid = uid;
+        this.sid = sid;
+    }
+
+    public Browse(Integer bid, Integer uid, Integer sid, Date time) {
+        this.bid = bid;
+        this.uid = uid;
+        this.sid = sid;
+        this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return "com.example.demo.bean.Browse{" +
+                "bid=" + bid +
+                ", uid=" + uid +
+                ", sid=" + sid +
+                ", time=" + time +
+                '}';
+    }
 }
