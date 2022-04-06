@@ -179,7 +179,6 @@ export default {
           this.tableData = Response.data;
         });
       console.log("数据改变了");
-      this.$forceUpdate();
     },
   },
   created() {

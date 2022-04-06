@@ -84,14 +84,6 @@ export default {
               /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/,
             message: "请输入正确的手机号码",
           },
-          {
-            validator: (rule, value, callback) => {
-              if (!validMobile(value)) {
-                callback(new Error("请输入正确的手机号"));
-              }
-            },
-            message: "请输入正确的手机号码",
-          },
         ],
         account: [{ required: true, message: "请输入用户名", trigger: "blur" }],
         password: [
