@@ -76,11 +76,33 @@ export default {
         repeatPassword: "",
       },
       rules: {
-        phone: [{ required: true, message: "请输入手机号码", trigger: "blur" }],
+        phone: [
+          { required: true, message: "请输入手机号码", trigger: "blur" },
+          { min: 11, max: 11, message: "请输入11位手机号码", trigger: "blur" },
+          {
+            pattern:
+              /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/,
+            message: "请输入正确的手机号码",
+          },
+          {
+            validator: (rule, value, callback) => {
+              if (!validMobile(value)) {
+                callback(new Error("请输入正确的手机号"));
+              }
+            },
+            message: "请输入正确的手机号码",
+          },
+        ],
         account: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-        password: [{ validator: passwordValidator, trigger: "blur" }],
+        password: [
+          { required: true, validator: passwordValidator, trigger: "blur" },
+        ],
         repeatPassword: [
-          { validator: repeatPasswordValidator, trigger: "blur" },
+          {
+            required: true,
+            validator: repeatPasswordValidator,
+            trigger: "blur",
+          },
         ],
       },
     };
