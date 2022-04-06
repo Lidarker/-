@@ -10,4 +10,5 @@ public interface CollectionService {
     List<Collect> getCollectionByRoomId(int id);
     List<Collect> getCollectionByUserId(int id);
     String insertCollection(Collect collect);
+    Integer deleteByRid(int rid);
 }

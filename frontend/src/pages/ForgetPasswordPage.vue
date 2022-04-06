@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import CommonTop from "../components/CommonTop";
 
 export default {
@@ -83,14 +84,6 @@ export default {
               /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/,
             message: "请输入正确的手机号码",
           },
-          {
-            validator: (rule, value, callback) => {
-              if (!validMobile(value)) {
-                callback(new Error("请输入正确的手机号"));
-              }
-            },
-            message: "请输入正确的手机号码",
-          },
         ],
         account: [{ required: true, message: "请输入用户名", trigger: "blur" }],
         password: [
@@ -111,21 +104,21 @@ export default {
       console.log(this.form);
       this.$refs["form"].validate((valid) => {
         if (valid) {
-          // axios
-          //   .get("http://localhost:8081/user/register", {
-          //     params: {
-          //       phone: this.form.phone,
-          //       userName: this.form.account,
-          //       password: this.form.password,
-          //     },
-          //   })
-          //   .then((Response) => {
-          //     console.log("数据", Response.data);
-          //     alert(Response.data);
-          //     if (Response.data == "注册成功") {
-          //       this.$router.push({ path: "/login" });
-          //     }
-          //   });
+          axios
+            .get("http://localhost:8081/user/changePassword", {
+              params: {
+                phone: this.form.phone,
+                userName: this.form.account,
+                password: this.form.password,
+              },
+            })
+            .then((Response) => {
+              console.log("数据", Response.data);
+              alert(Response.data);
+              if (Response.data == "修改成功") {
+                this.$router.push({ path: "/login" });
+              }
+            });
         } else {
           console.log("error submit!!");
           return false;

@@ -36,7 +36,11 @@
             @click="handleEdit(scope.$index, scope.row)"
             >编辑</el-button
           >
-          <el-button type="danger" size="mini" @click="deleteHint">
+          <el-button
+            type="danger"
+            size="mini"
+            @click="deleteHint(scope.$index, scope.row)"
+          >
             删除
           </el-button>
         </template>
@@ -131,21 +135,30 @@ export default {
   methods: {
     handleEdit(index, row) {
       this.editData.rid = row.rid;
+      this.editData.rtype = row.rtype;
+      this.editData.raddress = row.raddress;
+      this.editData.rprice = row.rprice;
+      this.editData.description = row.description;
+      this.editData.certificateid = row.certificateid;
       this.editVisible = true;
     },
-    handleDelete(index, row) {
-      console.log(index, row);
-    },
-    deleteHint() {
+    deleteHint(index, row) {
       this.$prompt("请输入删除理由", "删除", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
       })
         .then(({ value }) => {
-          this.$message({
-            type: "success",
-            message: "删除成功",
-          });
+          axios
+            .get("http://localhost:8081/room/deleteRoom", {
+              params: { rid: row.rid },
+            })
+            .then((Response) => {
+              this.changeData();
+              this.$message({
+                type: "success",
+                message: "删除成功",
+              });
+            });
         })
         .catch(() => {});
     },
@@ -184,8 +197,6 @@ export default {
         params: { account: this.account },
       })
       .then((Response) => {
-        console.log("数据", Response.data);
-        console.log(this.tableData);
         this.tableData = Response.data;
       });
     this.$bus.$on("change", (val) => {
