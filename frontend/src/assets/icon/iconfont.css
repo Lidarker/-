@@ -1,8 +1,8 @@
 @font-face {
   font-family: "aliiconfont"; /* Project id 3165769 */
-  src: url('iconfont.woff2?t=1643456765220') format('woff2'),
-       url('iconfont.woff?t=1643456765220') format('woff'),
-       url('iconfont.ttf?t=1643456765220') format('truetype');
+  src: url('iconfont.woff2?t=1649263141627') format('woff2'),
+       url('iconfont.woff?t=1649263141627') format('woff'),
+       url('iconfont.ttf?t=1649263141627') format('truetype');
 }
 
 .aliiconfont {
@@ -11,6 +11,15 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.al-iconjushoucanggift:before {
+  color: #d81e06;
+  content: "\e684";
+}
+
+.al-iconjushoucang:before {
+  content: "\e643";
 }
 
 .al-iconyanjing:before {
@@ -31,10 +40,6 @@
 
 .al-iconliuyan:before {
   content: "\e744";
-}
-
-.al-iconshoucang:before {
-  content: "\e627";
 }
 
 .al-iconzhuce:before {

@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "829167",
+      "name": "聚收藏gift",
+      "font_class": "jushoucanggift",
+      "unicode": "e684",
+      "unicode_decimal": 59012
+    },
+    {
+      "icon_id": "627569",
+      "name": "聚收藏",
+      "font_class": "jushoucang",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
       "icon_id": "630126",
       "name": "眼睛",
       "font_class": "yanjing",
@@ -39,13 +53,6 @@
       "font_class": "liuyan",
       "unicode": "e744",
       "unicode_decimal": 59204
-    },
-    {
-      "icon_id": "2674484",
-      "name": "收藏",
-      "font_class": "shoucang",
-      "unicode": "e627",
-      "unicode_decimal": 58919
     },
     {
       "icon_id": "7090090",

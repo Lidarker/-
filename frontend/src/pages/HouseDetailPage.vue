@@ -46,7 +46,11 @@
             <el-button
               type="danger"
               @click="collect"
-              icon="aliiconfont al-iconshoucang"
+              :icon="
+                false
+                  ? 'aliiconfont al-iconjushoucanggift'
+                  : 'aliiconfont al-iconjushoucang'
+              "
             >
               收藏
             </el-button>
@@ -60,8 +64,8 @@
               src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
             ></el-avatar>
           </div>
-          <div style="margin-top: 15x; margin-bottom: 15px;">
-            {{user.account}}
+          <div style="margin-top: 15x; margin-bottom: 15px">
+            {{ user.account }}
             <span style="color: orange; font-size: 12px">（已认证）</span>
           </div>
           <el-button
@@ -128,9 +132,7 @@
       </el-input>
       <span slot="footer" class="dialog-footer">
         <el-button @click="commentVisible = false">取 消</el-button>
-        <el-button type="primary" @click="commitComment">
-          确 定
-        </el-button>
+        <el-button type="primary" @click="commitComment"> 确 定 </el-button>
       </span>
     </el-dialog>
   </div>
@@ -149,26 +151,26 @@ export default {
       complaintContent: "",
       commentContent: "",
       roomId: "",
-      room:{
-        rid: '',
-        rtype: '',
-        raddress: '',
-        rprice: '',
-        description: '',
-        rimage: '',
-        certificateid: ''
+      room: {
+        rid: "",
+        rtype: "",
+        raddress: "",
+        rprice: "",
+        description: "",
+        rimage: "",
+        certificateid: "",
       },
-      user:{
-        account:"",
+      user: {
+        account: "",
       },
-      userComment:{
-        comment:{
-          rid:"",
-          detail:"",
+      userComment: {
+        comment: {
+          rid: "",
+          detail: "",
         },
-        user:{
-          account:""
-        }
+        user: {
+          account: "",
+        },
       },
     };
   },
@@ -183,34 +185,39 @@ export default {
       console.log(this.$router);
       this.$router.back();
     },
-    commitComment(){
+    commitComment() {
       this.commentVisible = false;
-      this.userComment.user.account=sessionStorage.getItem("access_token");
-      this.userComment.comment.rid=this.roomId;
-      this.userComment.comment.detail=this.commentContent;
-      axios.post("http://localhost:8081/commitComment",this.userComment).then(res=>{
-          console.log('res=>',res);  
+      this.userComment.user.account = sessionStorage.getItem("access_token");
+      this.userComment.comment.rid = this.roomId;
+      this.userComment.comment.detail = this.commentContent;
+      axios
+        .post("http://localhost:8081/commitComment", this.userComment)
+        .then((res) => {
+          console.log("res=>", res);
           alert(res.data);
           this.$refs.child.updateNow();
+        });
+    },
+  },
+  created() {
+    this.roomId = this.$route.query.id;
+    axios
+      .get("http://localhost:8081/room/getRoom", {
+        params: { id: this.roomId },
       })
-    }
-
+      .then((Response) => {
+        console.log("数据", Response.data);
+        this.room = Response.data;
+      });
+    axios
+      .get("http://localhost:8081/getOwner", { params: { rid: this.roomId } })
+      .then((Response) => {
+        console.log("数据", Response.data);
+        this.user = Response.data;
+      });
   },
-  created(){
-    this.roomId=this.$route.query.id;
-      axios.get("http://localhost:8081/room/getRoom",{params:{id:this.roomId}}).then((Response) => {
-      console.log("数据", Response.data);
-      this.room=Response.data;
-    });
-     axios.get("http://localhost:8081/getOwner",{params:{rid:this.roomId}}).then((Response) => {
-     console.log("数据", Response.data);
-     this.user=Response.data;
-    });
-  },
-  mounted() {
-  },
-  updated(){
-  }
+  mounted() {},
+  updated() {},
 };
 </script>
 
