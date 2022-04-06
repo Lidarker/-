@@ -109,4 +109,12 @@ public class RoomServiceImpl implements RoomService {
         }
     }
 
+    @Override
+    public List<Room> getRoomByImg(String img) {
+        RoomExample roomExample=new RoomExample();
+        RoomExample.Criteria criteria=roomExample.createCriteria();
+        criteria.andRimageEqualTo(img);
+        return roomMapper.selectByExample(roomExample);
+    }
+
 }

@@ -237,6 +237,28 @@ public class Room {
         this.certificateid = certificateid;
     }
 
+    public Room() {
+    }
+
+    public Room(String rtype, String raddress, Integer rprice, String description, String rimage, String certificateid) {
+        this.rtype = rtype;
+        this.raddress = raddress;
+        this.rprice = rprice;
+        this.description = description;
+        this.rimage = rimage;
+        this.certificateid = certificateid;
+    }
+
+    public Room(Integer rid, String rtype, String raddress, Integer rprice, String description, String rimage, String certificateid) {
+        this.rid = rid;
+        this.rtype = rtype;
+        this.raddress = raddress;
+        this.rprice = rprice;
+        this.description = description;
+        this.rimage = rimage;
+        this.certificateid = certificateid;
+    }
+
     @Override
     public String toString() {
         return "com.example.demo.bean.Room{" +

@@ -139,4 +139,19 @@ public class Collect {
     public void setTime(Date time) {
         this.time = time;
     }
+
+    public Collect(Integer uid, Integer rid) {
+        this.uid = uid;
+        this.rid = rid;
+    }
+
+    @Override
+    public String toString() {
+        return "com.example.demo.bean.Collect{" +
+                "cid=" + cid +
+                ", uid=" + uid +
+                ", rid=" + rid +
+                ", time=" + time +
+                '}';
+    }
 }

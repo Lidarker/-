@@ -1,11 +1,18 @@
 package com.example.demo.controller;
 
+import com.example.demo.bean.Collect;
 import com.example.demo.bean.Room;
+import com.example.demo.service.CollectionService;
 import com.example.demo.service.RoomService;
-import com.example.demo.serviceImpl.RoomServiceImpl;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @RequestMapping("/room")
@@ -14,6 +21,10 @@ import java.util.List;
 public class RoomController {
     @Autowired
     private RoomService roomService;
+    @Autowired
+    private CollectionService collectionService;
+    @Autowired
+    private UserService userService;
     @RequestMapping(value = "/getAllRoom",method = RequestMethod.GET)
     public List<Room>getAllRoom(){return roomService.findAllRoom();}
     @RequestMapping(value = "/getRoom",params = {"city"},method = RequestMethod.GET)
@@ -44,5 +55,37 @@ public class RoomController {
     @RequestMapping(value="/updateRoom",method = RequestMethod.POST)
     public String updateRoom(@RequestBody Room room){
         return roomService.updateRoom(room);
+    }
+    @RequestMapping(value="/insertHouse",method = RequestMethod.POST)
+    @ResponseBody
+    public String insertHouse(HttpServletRequest request){
+        MultipartHttpServletRequest params=(MultipartHttpServletRequest) request;
+        MultipartFile file=((MultipartHttpServletRequest) request).getFile("picture");
+        String picName=params.getParameter("pic_uid")+".jpg";
+        if(!file.isEmpty()){
+            //部署后需要改路径
+            String filePath="D:\\-\\frontend\\public\\static\\img\\"+picName;
+            File fileSave=new File(filePath);
+            try {
+                file.transferTo(fileSave);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "发布房源失败";
+            }
+        }
+        Room room=new Room(params.getParameter("type"),
+                params.getParameter("address"),
+                Integer.parseInt(params.getParameter("price")),
+                params.getParameter("advance"),
+                picName,
+                params.getParameter("number"));
+        String res=roomService.addRoom(room);
+        List<Room>rooms=roomService.getRoomByImg(picName);
+        Integer rid=rooms.get(0).getRid();
+        String account=params.getParameter("account");
+        Integer uid=userService.findByAccount(account).getUid();
+        Collect collect=new Collect(uid,rid);
+        collectionService.insertCollection(collect);
+        return res;
     }
 }

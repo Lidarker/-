@@ -132,10 +132,11 @@ export default {
           for (var key in this.houseData) {
             forms.append(key, this.houseData[key])
           }
-          forms.append("pic_uid", this.fileList[0].uid)
+          forms.append("pic_uid", this.fileList[0].uid);
           forms.append("picture", this.fileList[0].raw);
+          forms.append("account",sessionStorage.getItem("access_token"));
           axios
-            .post("http://localhost:8080/test/publish_house", forms, {
+            .post("http://localhost:8081/room/insertHouse", forms, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },
