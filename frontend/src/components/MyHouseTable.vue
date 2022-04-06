@@ -36,7 +36,11 @@
             @click="handleEdit(scope.$index, scope.row)"
             >编辑</el-button
           >
-          <el-button type="danger" size="mini" @click="deleteHint(scope.$index, scope.row)">
+          <el-button
+            type="danger"
+            size="mini"
+            @click="deleteHint(scope.$index, scope.row)"
+          >
             删除
           </el-button>
         </template>
@@ -131,12 +135,14 @@ export default {
   methods: {
     handleEdit(index, row) {
       this.editData.rid = row.rid;
+      this.editData.rtype = row.rtype;
+      this.editData.raddress = row.raddress;
+      this.editData.rprice = row.rprice;
+      this.editData.description = row.description;
+      this.editData.certificateid = row.certificateid;
       this.editVisible = true;
     },
-    handleDelete(index, row) {
-      console.log(row);
-    },
-    deleteHint(index,row) {
+    deleteHint(index, row) {
       this.$prompt("请输入删除理由", "删除", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -148,11 +154,11 @@ export default {
             })
             .then((Response) => {
               this.changeData();
+              this.$message({
+                type: "success",
+                message: "删除成功",
+              });
             });
-          this.$message({
-            type: "success",
-            message: "删除成功",
-          });
         })
         .catch(() => {});
     },
@@ -160,14 +166,9 @@ export default {
       this.$refs["editForm"].validate((valid) => {
         if (valid) {
           this.editVisible = false;
-          console.log("submit!");
-          console.log(this.editData);
           axios
             .post("http://localhost:8081/room/updateRoom", this.editData)
             .then((res) => {
-              console.log("res=>", res);
-              this.editResult = res.data;
-              alert(this.editResult);
               this.changeData();
             });
         } else {
@@ -184,12 +185,10 @@ export default {
         .then((Response) => {
           this.tableData = Response.data;
         });
-      console.log("数据改变了");
     },
   },
   created() {
     // sessionStorage.getItem("access_token") 可以取出当前登录的用户的用户名
-    // console.log("@", sessionStorage.getItem("access_token"));
     this.account = sessionStorage.getItem("access_token");
   },
   mounted() {
@@ -198,8 +197,6 @@ export default {
         params: { account: this.account },
       })
       .then((Response) => {
-        console.log("数据", Response.data);
-        console.log(this.tableData);
         this.tableData = Response.data;
       });
     this.$bus.$on("change", (val) => {

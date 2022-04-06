@@ -130,11 +130,11 @@ export default {
           this.uploadVisible = false;
           var forms = new FormData();
           for (var key in this.houseData) {
-            forms.append(key, this.houseData[key])
+            forms.append(key, this.houseData[key]);
           }
           forms.append("pic_uid", this.fileList[0].uid);
           forms.append("picture", this.fileList[0].raw);
-          forms.append("account",sessionStorage.getItem("access_token"));
+          forms.append("account", sessionStorage.getItem("access_token"));
           axios
             .post("http://localhost:8081/room/insertHouse", forms, {
               headers: {
@@ -142,12 +142,18 @@ export default {
               },
             })
             .then((Response) => {
-              console.log("数据", Response.data);
-              if(Response.data=="添加成功"){
-                this.$bus.$emit('change',this.uploadVisible)
+              if (Response.data == "添加成功") {
+                this.houseData = {
+                  address: "",
+                  price: undefined,
+                  type: "",
+                  number: "",
+                  advance: "",
+                };
+                this.fileList = [];
+                this.$bus.$emit("change");
               }
             });
-          // this.$refs.upload.submit();
           return true;
         } else {
           console.log("error submit!!");

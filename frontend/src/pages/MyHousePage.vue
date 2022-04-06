@@ -3,7 +3,6 @@
     <TopMenu activeIndex="/my-house" />
     <MyHouseTable />
     <PublishHouse />
-    
   </div>
 </template>
 
