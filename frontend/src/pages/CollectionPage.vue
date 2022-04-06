@@ -1,13 +1,18 @@
 <template lang="">
     <div>
-        这是收藏页面
+        <TopMenu activeIndex="/collection" />
+        <CollectionHouseTable />
     </div>
 </template>
 <script>
+import TopMenu from "../components/TopMenu";
+import CollectionHouseTable from "../components/CollectionHouseTable";
 export default {
-    
-}
+  components: {
+    TopMenu,
+    CollectionHouseTable,
+  },
+};
 </script>
-<style lang="">
-    
+<style>
 </style>
