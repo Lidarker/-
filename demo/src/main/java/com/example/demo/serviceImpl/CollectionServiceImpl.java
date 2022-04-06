@@ -37,5 +37,12 @@ public class CollectionServiceImpl implements CollectionService {
         return collectMapper.selectByExample(collectExample);
     }
 
+    @Override
+    public String insertCollection(Collect collect) {
+        int res=collectMapper.insertSelective(collect);
+        if(res==1) return "插入成功";
+        return "插入失败";
+    }
+
 
 }

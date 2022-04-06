@@ -9,4 +9,5 @@ public interface CollectionService {
     List<Collect> getAllCollection();
     List<Collect> getCollectionByRoomId(int id);
     List<Collect> getCollectionByUserId(int id);
+    String insertCollection(Collect collect);
 }

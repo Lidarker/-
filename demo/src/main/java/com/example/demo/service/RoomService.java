@@ -14,4 +14,5 @@ public interface RoomService {
     String deleteRoomById(int id);
     String addRoom(Room room);
     String updateRoom(Room room);
+    List<Room> getRoomByImg(String img);
 }
