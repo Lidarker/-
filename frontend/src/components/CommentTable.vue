@@ -5,19 +5,26 @@
         <el-row>
           <el-col :span="20">
             <div>{{ item.comment.detail }}</div>
-            <div class="comment-time">{{ item.comment.time }}</div>
+            <div class="comment-time">
+              {{
+                item.comment.time.length != 0
+                  ? (item.comment.time | datetimeFormater)
+                  : ""
+              }}
+            </div>
           </el-col>
           <el-col :span="4">
             <span>{{ item.user.account }}</span>
           </el-col>
         </el-row>
-        <el-divider />
+        <el-divider class="comment-divider" />
       </div>
     </div>
   </div>
 </template>
 <script>
 import axios from "axios";
+import moment from "moment";
 export default {
   data() {
     return {
@@ -50,6 +57,11 @@ export default {
         });
     },
   },
+  filters: {
+    datetimeFormater(dateStr, pattern = "YYYY-MM-DD HH:mm:ss") {
+      return moment(dateStr).format(pattern);
+    },
+  },
   created() {
     this.roomId = this.$route.query.id;
   },
@@ -70,5 +82,9 @@ export default {
 .comment-time {
   color: #ccc;
   font-size: 12px;
+  margin-top: 10px;
+}
+.comment-divider {
+  margin-top: 10px;
 }
 </style>
