@@ -42,7 +42,10 @@ const router = new VueRouter({
         },
         {
             path: '/collection',
-            component: CollectionPage
+            component: CollectionPage,
+            meta: {
+                requireUserAuth: true,
+            }
         },
         {
             path: '/my-house',
