@@ -48,6 +48,26 @@ import CommonTop from "../components/CommonTop";
 import axios from "axios";
 export default {
   data() {
+    var passwordValidator = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请输入密码"));
+      } else {
+        if (this.form.password !== "") {
+          this.$refs.form.validateField("repeatPassword");
+        }
+        callback();
+      }
+    };
+    var repeatPasswordValidator = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error("请再次输入密码"));
+      } else if (value !== this.form.password) {
+        callback(new Error("两次输入密码不一致!"));
+      } else {
+        callback();
+      }
+    };
+
     return {
       form: {
         phone: "",
@@ -58,32 +78,37 @@ export default {
       rules: {
         phone: [{ required: true, message: "请输入手机号码", trigger: "blur" }],
         account: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-        password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-        ],
+        password: [{ validator: passwordValidator, trigger: "blur" }],
         repeatPassword: [
-          { required: true, message: "请再次输入密码", trigger: "blur" },
+          { validator: repeatPasswordValidator, trigger: "blur" },
         ],
       },
     };
   },
   methods: {
     onSubmit() {
-      axios
-        .get("http://localhost:8081/user/register", {
-          params: {
-            phone: this.form.phone,
-            userName: this.form.account,
-            password: this.form.password,
-          },
-        })
-        .then((Response) => {
-          console.log("数据", Response.data);
-          alert(Response.data);
-          if (Response.data == "注册成功") {
-            this.$router.push({ path: "/login" });
-          }
-        });
+      this.$refs["form"].validate((valid) => {
+        if (valid) {
+          axios
+            .get("http://localhost:8081/user/register", {
+              params: {
+                phone: this.form.phone,
+                userName: this.form.account,
+                password: this.form.password,
+              },
+            })
+            .then((Response) => {
+              console.log("数据", Response.data);
+              alert(Response.data);
+              if (Response.data == "注册成功") {
+                this.$router.push({ path: "/login" });
+              }
+            });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     },
   },
   components: {
