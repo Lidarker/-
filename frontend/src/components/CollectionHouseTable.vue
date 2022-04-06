@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table :data="tableData" style="width: 100%" @row-click="handleRowClick">
+    <el-table :data="tableData" style="width: 100%" @row-click.stop="handleRowClick">
       <el-table-column label="房屋图片" width="280">
         <template slot-scope="scope">
           <img
