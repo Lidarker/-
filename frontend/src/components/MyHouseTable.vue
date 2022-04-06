@@ -148,39 +148,25 @@ export default {
         })
         .catch(() => {});
     },
-    },
-    submitHouseForm() {
-      this.$refs["houseForm"].validate((valid) => {
-        if (valid) {
-          this.uploadVisible = false;
-          // this.$refs.upload.submit();
-          alert("发布房源!");
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
-    },
     submitEditForm() {
       this.$refs["editForm"].validate((valid) => {
         if (valid) {
           this.editVisible = false;
           console.log("submit!");
           console.log(this.editData)
-          // this.$refs.upload.submit();
-          // axios.post("http://localhost:8081/room/updateRoom",this.editData).then(res=>{
-          //   console.log('res=>',res);  
-          //   this.editResult=res.data;
-          //   alert(this.editResult);
-          // })
+          axios.post("http://localhost:8081/room/updateRoom",this.editData).then(res=>{
+            console.log('res=>',res);  
+            this.editResult=res.data;
+            alert(this.editResult);
+          })
         } else {
           console.log("error submit!!");
           return false;
         }
 
-      });
-    
-  },
+      });  
+    },
+},
   created() {
     // sessionStorage.getItem("access_token") 可以取出当前登录的用户的用户名
     // console.log("@", sessionStorage.getItem("access_token"));
@@ -188,8 +174,9 @@ export default {
   },
   mounted(){
      axios.get("http://localhost:8081/getRoomByAccount",
-     {params:{account:this.account}}).
-     then((Response) => {
+     {
+       params:{account:this.account}}).
+      then((Response) => {
       console.log("数据", Response.data);
       console.log(this.tableData);
       this.tableData = Response.data;
