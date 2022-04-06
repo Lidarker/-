@@ -20,4 +20,11 @@ public class CommentServiceImpl implements CommentService {
         criteria.andRidEqualTo(id);
         return commentMapper.selectByExample(commentExample);
     }
+
+    @Override
+    public String insertComment(Comment comment) {
+        if(commentMapper.insertSelective(comment)==1){
+            return "添加评论成功";
+        }else return "添加评论失败";
+    }
 }

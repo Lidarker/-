@@ -203,4 +203,16 @@ public class User {
     public void setIsadmin(Boolean isadmin) {
         this.isadmin = isadmin;
     }
+
+    @Override
+    public String toString() {
+        return "com.example.demo.bean.User{" +
+                "uid=" + uid +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", image='" + image + '\'' +
+                ", isadmin=" + isadmin +
+                '}';
+    }
 }

@@ -35,6 +35,16 @@ export default {
       roomId:"",
     };
   },
+  methods:{
+    updateNow(){
+      console.log("父组件让我更新数据");
+      axios.get("http://localhost:8081/getCommentByRoomId",{params:{rid:this.roomId}}).then((Response) => {
+      console.log("数据", Response.data);
+      console.log(this.tableData);
+      this.commentData = Response.data;
+      });
+    }
+  },
   created() {
     this.roomId=this.$route.query.id;
     console.log("在这发送请求获取评论数据")
@@ -45,12 +55,13 @@ export default {
     // });
   },
   mounted(){
-    axios.get("http://localhost:8081/getCommentByRoomId",{params:{rid:this.roomId}}).then((Response) => {
+     axios.get("http://localhost:8081/getCommentByRoomId",{params:{rid:this.roomId}}).then((Response) => {
       console.log("数据", Response.data);
       console.log(this.tableData);
       this.commentData = Response.data;
-    });
-}
+      });
+  },
+
 
 };
 </script>

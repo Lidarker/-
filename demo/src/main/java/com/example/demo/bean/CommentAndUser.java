@@ -27,4 +27,12 @@ public class CommentAndUser {
         this.comment = comment;
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "com.example.demo.bean.CommentAndUser{" +
+                "comment=" + comment +
+                ", user=" + user +
+                '}';
+    }
 }

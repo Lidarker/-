@@ -81,7 +81,7 @@
         添加评论
       </el-button>
     </div>
-    <CommentTable :id="'comment-table'" />
+    <CommentTable :id="'comment-table'" ref="child" />
     <el-dialog
       title="给房东留言"
       :visible.sync="leaveMessageVisible"
@@ -128,7 +128,7 @@
       </el-input>
       <span slot="footer" class="dialog-footer">
         <el-button @click="commentVisible = false">取 消</el-button>
-        <el-button type="primary" @click="commentVisible = false">
+        <el-button type="primary" @click="commitComment">
           确 定
         </el-button>
       </span>
@@ -160,7 +160,16 @@ export default {
       },
       user:{
         account:"",
-      }
+      },
+      userComment:{
+        comment:{
+          rid:"",
+          detail:"",
+        },
+        user:{
+          account:""
+        }
+      },
     };
   },
   components: {
@@ -174,6 +183,18 @@ export default {
       console.log(this.$router);
       this.$router.back();
     },
+    commitComment(){
+      this.commentVisible = false;
+      this.userComment.user.account=sessionStorage.getItem("access_token");
+      this.userComment.comment.rid=this.roomId;
+      this.userComment.comment.detail=this.commentContent;
+      axios.post("http://localhost:8081/commitComment",this.userComment).then(res=>{
+          console.log('res=>',res);  
+          alert(res.data);
+          this.$refs.child.updateNow();
+      })
+    }
+
   },
   created(){
     this.roomId=this.$route.query.id;
@@ -182,11 +203,14 @@ export default {
       this.room=Response.data;
     });
      axios.get("http://localhost:8081/getOwner",{params:{rid:this.roomId}}).then((Response) => {
-      console.log("数据", Response.data);
-      this.user=Response.data;
+     console.log("数据", Response.data);
+     this.user=Response.data;
     });
   },
-  mounted() {},
+  mounted() {
+  },
+  updated(){
+  }
 };
 </script>
 

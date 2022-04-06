@@ -30,7 +30,7 @@
       </el-table-column>
       <el-table-column label="操作" width="300">
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" @click="editVisible = true"
+          <el-button type="primary" size="mini" @click="handleEdit(scope.$index, scope.row)"
             >编辑</el-button
           >
           <el-button type="danger" size="mini" @click="deleteHint">
@@ -47,24 +47,24 @@
         label-position="right"
         label-width="100px"
       >
-        <el-form-item label="所在地址" prop="address">
-          <el-input v-model="editData.address"></el-input>
+        <el-form-item label="所在地址" prop="raddress">
+          <el-input v-model="editData.raddress"></el-input>
         </el-form-item>
-        <el-form-item label="月租/元" prop="price">
-          <el-input type="number" v-model="editData.price"></el-input>
+        <el-form-item label="月租/元" prop="rprice">
+          <el-input type="number" v-model="editData.rprice"></el-input>
         </el-form-item>
-        <el-form-item label="房屋类型" prop="type">
-          <el-input v-model="editData.type"></el-input>
+        <el-form-item label="房屋类型" prop="rtype">
+          <el-input v-model="editData.rtype"></el-input>
         </el-form-item>
-        <el-form-item label="房产证编号" prop="number">
-          <el-input v-model="editData.number"></el-input>
+        <el-form-item label="房产证编号" prop="certificateid">
+          <el-input v-model="editData.certificateid"></el-input>
         </el-form-item>
-        <el-form-item label="优劣" prop="advance">
+        <el-form-item label="优劣" prop="description">
           <el-input
             type="textarea"
             :rows="4"
             placeholder="请输入内容"
-            v-model="editData.advance"
+            v-model="editData.description"
           >
           </el-input>
         </el-form-item>
@@ -150,11 +150,12 @@ export default {
     return {
       editVisible: false,
       editData: {
-        address: "",
-        price: undefined,
-        type: "",
-        number: "",
-        advance: "",
+        raddress: "",
+        rprice: undefined,
+        rtype: "",
+        certificateid: "",
+        description: "",
+        rid:"",
       },
       uploadVisible: false,
 
@@ -171,13 +172,13 @@ export default {
       ],
       fileList: [],
       rules: {
-        address: [{ required: true, message: "请输入地址", trigger: "blur" }],
-        price: [{ required: true, message: "请输入月租", trigger: "blur" }],
-        type: [{ required: true, message: "请输入房屋类型", trigger: "blur" }],
-        number: [
+        raddress: [{ required: true, message: "请输入地址", trigger: "blur" }],
+        rprice: [{ required: true, message: "请输入月租", trigger: "blur" }],
+        rtype: [{ required: true, message: "请输入房屋类型", trigger: "blur" }],
+        certificateid: [
           { required: true, message: "请输入房产证编号", trigger: "blur" },
         ],
-        advance: [
+        description: [
           { required: true, message: "请输入房屋优劣", trigger: "blur" },
         ],
         picture: [{ required: true, validator: validateFile, trigger: "blur" }],
@@ -185,11 +186,13 @@ export default {
       account:{
 
       },
+      editResult:""
     };
   },
   methods: {
     handleEdit(index, row) {
-      console.log(index, row);
+      this.editData.rid=row.rid;
+      this.editVisible = true;
     },
     handleDelete(index, row) {
       console.log(index, row);
@@ -237,7 +240,7 @@ export default {
         if (valid) {
           this.uploadVisible = false;
           // this.$refs.upload.submit();
-          alert("submit!");
+          alert("发布房源!");
         } else {
           console.log("error submit!!");
           return false;
@@ -249,11 +252,16 @@ export default {
         if (valid) {
           this.editVisible = false;
           // this.$refs.upload.submit();
-          alert("submit!");
+          axios.post("http://localhost:8081/room/updateRoom",this.editData).then(res=>{
+            console.log('res=>',res);  
+            this.editResult=res.data;
+            alert(this.editResult);
+          })
         } else {
           console.log("error submit!!");
           return false;
         }
+
       });
     },
   },
@@ -266,6 +274,11 @@ export default {
      axios.get("http://localhost:8081/getRoomByAccount",{params:{account:this.account}}).then((Response) => {
       console.log("数据", Response.data);
       console.log(this.tableData);
+      this.tableData = Response.data;
+    });
+  },
+  updated(){
+    axios.get("http://localhost:8081/getRoomByAccount",{params:{account:this.account}}).then((Response) => {
       this.tableData = Response.data;
     });
   }

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CommentService {
     List<Comment> getCommentByRoomId(int id);
+    String insertComment(Comment comment);
 }

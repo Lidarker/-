@@ -60,4 +60,14 @@ public class DetailController {
         }
         return commentAndUsers;
     }
+    @RequestMapping(value = "/commitComment",method = RequestMethod.POST)
+    public String commitComment(@RequestBody CommentAndUser commentAndUser){
+        if(commentAndUser.getUser().getAccount()==null){
+            return "评论失败，请您先登录平台";
+        }
+        User user=userService.findByAccount(commentAndUser.getUser().getAccount());
+        Comment comment=commentAndUser.getComment();
+        comment.setUid(user.getUid());
+        return commentService.insertComment(comment);
+    }
 }

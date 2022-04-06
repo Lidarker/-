@@ -236,4 +236,17 @@ public class Room {
     public void setCertificateid(String certificateid) {
         this.certificateid = certificateid;
     }
+
+    @Override
+    public String toString() {
+        return "com.example.demo.bean.Room{" +
+                "rid=" + rid +
+                ", rtype='" + rtype + '\'' +
+                ", raddress='" + raddress + '\'' +
+                ", rprice=" + rprice +
+                ", description='" + description + '\'' +
+                ", rimage='" + rimage + '\'' +
+                ", certificateid='" + certificateid + '\'' +
+                '}';
+    }
 }

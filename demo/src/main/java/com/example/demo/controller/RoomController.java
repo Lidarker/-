@@ -39,6 +39,10 @@ public class RoomController {
     }
     @RequestMapping(value = "/getRoom",params = {"id"},method = RequestMethod.GET)
     public Room getRoomById(@RequestParam("id")int id){return roomService.getRoomById(id);}
-    @RequestMapping(value = "deleteRoom",method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteRoom",method = RequestMethod.GET)
     public String deleteRoom(@RequestParam("id")int id){return roomService.deleteRoomById(id);}
+    @RequestMapping(value="/updateRoom",method = RequestMethod.POST)
+    public String updateRoom(@RequestBody Room room){
+        return roomService.updateRoom(room);
+    }
 }
