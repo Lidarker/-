@@ -204,6 +204,18 @@ public class User {
         this.isadmin = isadmin;
     }
 
+    public User() {
+    }
+
+    public User(Integer uid, String account, String password, String phone, String image, Boolean isadmin) {
+        this.uid = uid;
+        this.account = account;
+        this.password = password;
+        this.phone = phone;
+        this.image = image;
+        this.isadmin = isadmin;
+    }
+
     @Override
     public String toString() {
         return "com.example.demo.bean.User{" +

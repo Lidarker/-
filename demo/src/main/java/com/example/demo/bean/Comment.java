@@ -172,4 +172,26 @@ public class Comment {
     public void setDetail(String detail) {
         this.detail = detail;
     }
+
+    public Comment() {
+    }
+
+    public Comment(Integer cid, Date time, Integer uid, Integer rid, String detail) {
+        this.cid = cid;
+        this.time = time;
+        this.uid = uid;
+        this.rid = rid;
+        this.detail = detail;
+    }
+
+    @Override
+    public String toString() {
+        return "com.example.demo.bean.Comment{" +
+                "cid=" + cid +
+                ", time=" + time +
+                ", uid=" + uid +
+                ", rid=" + rid +
+                ", detail='" + detail + '\'' +
+                '}';
+    }
 }

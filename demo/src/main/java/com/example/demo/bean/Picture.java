@@ -71,4 +71,20 @@ public class Picture {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public Picture() {
+    }
+
+    public Picture(Integer pid, String image) {
+        this.pid = pid;
+        this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "com.example.demo.bean.Picture{" +
+                "pid=" + pid +
+                ", image='" + image + '\'' +
+                '}';
+    }
 }

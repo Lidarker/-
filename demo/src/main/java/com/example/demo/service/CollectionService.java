@@ -9,6 +9,7 @@ public interface CollectionService {
     List<Collect> getAllCollection();
     List<Collect> getCollectionByRoomId(int id);
     List<Collect> getCollectionByUserId(int id);
+    List<Collect> getCollectionByCId(int id);
     String insertCollection(Collect collect);
     Integer deleteByRid(int rid);
 }
