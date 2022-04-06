@@ -2,30 +2,30 @@
   <div style="margin-right: 10px; margin-left: 10px">
     <CommonTop pos="忘记密码" />
     <el-card class="box-card" style="margin-left: 30%; margin-right: 30%">
-      <el-form ref="form" :model="form">
-        <el-form-item>
+       <el-form ref="form" :model="form" :rules="rules">
+        <el-form-item prop="phone">
           <el-input
-            v-model="form.email"
-            placeholder="邮箱"
-            prefix-icon="aliiconfont al-iconyouxiang"
+            v-model="form.phone"
+            placeholder="手机号"
+            prefix-icon="el-icon-phone"
           ></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="account">
           <el-input
-            v-model="form.userName"
+            v-model="form.account"
             placeholder="账户"
             prefix-icon="el-icon-user-solid"
           ></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="password">
           <el-input
             show-password
             v-model="form.password"
-            placeholder="新密码"
+            placeholder="密码"
             prefix-icon="el-icon-lock"
           ></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="repeatPassword">
           <el-input
             show-password
             v-model="form.repeatPassword"
@@ -50,8 +50,8 @@ export default {
   data() {
     return {
       form: {
-        email: "",
-        userName: "",
+        phone: "",
+        account: "",
         password: "",
         repeatPassword: "",
       },
