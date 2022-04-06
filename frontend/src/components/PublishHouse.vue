@@ -142,9 +142,10 @@ export default {
               },
             })
             .then((Response) => {
-              console.log("数据", Response.data);
+              if(Response.data=="添加成功"){
+                this.$bus.$emit('change')
+              }
             });
-          // this.$refs.upload.submit();
           return true;
         } else {
           console.log("error submit!!");
