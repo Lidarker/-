@@ -39,7 +39,7 @@
         <el-form-item label="图片" prop="picture">
           <el-upload
             ref="upload"
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action="image/jpeg"
             :limit="3"
             :before-upload="beforeAvatarUpload"
             :on-change="handleChange"
@@ -132,6 +132,7 @@ export default {
           for (var key in this.houseData) {
             forms.append(key, this.houseData[key])
           }
+          forms.append("pic_uid", this.fileList[0].uid)
           forms.append("picture", this.fileList[0].raw);
           axios
             .post("http://localhost:8080/test/publish_house", forms, {
@@ -142,7 +143,6 @@ export default {
             .then((Response) => {
               console.log("数据", Response.data);
             });
-          console.log("submit!");
           // this.$refs.upload.submit();
           return true;
         } else {
