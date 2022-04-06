@@ -4,13 +4,14 @@
       <div v-for="item in this.commentData" :key="item.comment.cid">
         <el-row>
           <el-col :span="20">
-            <div>{{item.comment.detail}}</div>
-            <div>{{item.comment.time}}</div>
+            <div>{{ item.comment.detail }}</div>
+            <div class="comment-time">{{ item.comment.time }}</div>
           </el-col>
           <el-col :span="4">
-            <span>{{item.user.account}}</span>
+            <span>{{ item.user.account }}</span>
           </el-col>
         </el-row>
+        <el-divider />
       </div>
     </div>
   </div>
@@ -22,49 +23,52 @@ export default {
     return {
       commentData: [
         {
-          comment:{
-            cid:"",
-            detail:"",
-            time:""
+          comment: {
+            cid: "",
+            detail: "",
+            time: "",
           },
-          user:{
-            account:""
-          }
-        }
+          user: {
+            account: "",
+          },
+        },
       ],
-      roomId:"",
+      roomId: "",
     };
   },
-  methods:{
-    updateNow(){
+  methods: {
+    updateNow() {
       console.log("父组件让我更新数据");
-      axios.get("http://localhost:8081/getCommentByRoomId",{params:{rid:this.roomId}}).then((Response) => {
-      console.log("数据", Response.data);
-      console.log(this.tableData);
-      this.commentData = Response.data;
-      });
-    }
+      axios
+        .get("http://localhost:8081/getCommentByRoomId", {
+          params: { rid: this.roomId },
+        })
+        .then((Response) => {
+          console.log("数据", Response.data);
+          console.log(this.tableData);
+          this.commentData = Response.data;
+        });
+    },
   },
   created() {
-    this.roomId=this.$route.query.id;
-    console.log("在这发送请求获取评论数据")
-    // axios.get("http://172.19.241.36:8081/xxx").then((Response) => {
-    //   console.log("数据", Response.data);
-    //   console.log(this.tableData);
-    //   this.commentData = Response.data;
-    // });
+    this.roomId = this.$route.query.id;
   },
-  mounted(){
-     axios.get("http://localhost:8081/getCommentByRoomId",{params:{rid:this.roomId}}).then((Response) => {
-      console.log("数据", Response.data);
-      console.log(this.tableData);
-      this.commentData = Response.data;
+  mounted() {
+    axios
+      .get("http://localhost:8081/getCommentByRoomId", {
+        params: { rid: this.roomId },
+      })
+      .then((Response) => {
+        console.log("数据", Response.data);
+        console.log(this.tableData);
+        this.commentData = Response.data;
       });
   },
-
-
 };
 </script>
 <style>
-
+.comment-time {
+  color: #ccc;
+  font-size: 12px;
+}
 </style>
