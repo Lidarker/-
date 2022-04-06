@@ -36,7 +36,7 @@
             @click="handleEdit(scope.$index, scope.row)"
             >编辑</el-button
           >
-          <el-button type="danger" size="mini" @click="deleteHint">
+          <el-button type="danger" size="mini" @click="deleteHint(scope.$index, scope.row)">
             删除
           </el-button>
         </template>
@@ -134,14 +134,21 @@ export default {
       this.editVisible = true;
     },
     handleDelete(index, row) {
-      console.log(index, row);
+      console.log(row);
     },
-    deleteHint() {
+    deleteHint(index,row) {
       this.$prompt("请输入删除理由", "删除", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
       })
         .then(({ value }) => {
+          axios
+            .get("http://localhost:8081/room/deleteRoom", {
+              params: { rid: row.rid },
+            })
+            .then((Response) => {
+              this.changeData();
+            });
           this.$message({
             type: "success",
             message: "删除成功",
@@ -168,7 +175,6 @@ export default {
           return false;
         }
       });
-     
     },
     changeData() {
       axios

@@ -44,5 +44,13 @@ public class CollectionServiceImpl implements CollectionService {
         return "插入失败";
     }
 
+    @Override
+    public Integer deleteByRid(int rid) {
+        CollectExample collectExample=new CollectExample();
+        CollectExample.Criteria criteria=collectExample.createCriteria();
+        criteria.andRidEqualTo(rid);
+        return collectMapper.deleteByExample(collectExample);
+    }
+
 
 }

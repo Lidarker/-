@@ -77,14 +77,8 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public String deleteRoomById(int id) {
-        int res=roomMapper.deleteByPrimaryKey(id);
-        if(res==1)
-        {
-            return "删除成功";
-        }else{
-            return "删除失败";
-        }
+    public int deleteRoomById(int id) {
+        return roomMapper.deleteByPrimaryKey(id);
     }
 
     @Override

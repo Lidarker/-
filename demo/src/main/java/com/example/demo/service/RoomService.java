@@ -11,7 +11,7 @@ public interface RoomService {
     List<Room> getRoomByType(String type);
     List<Room> getRoomByDcr(String word);
     Room getRoomById(int id);
-    String deleteRoomById(int id);
+    int deleteRoomById(int id);
     String addRoom(Room room);
     String updateRoom(Room room);
     List<Room> getRoomByImg(String img);
