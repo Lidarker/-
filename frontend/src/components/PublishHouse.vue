@@ -127,8 +127,20 @@ export default {
       this.$refs["houseForm"].validate((valid) => {
         if (valid) {
           this.uploadVisible = false;
-          console.log(this.fileList);
-          console.log(this.fileList[0].raw);
+          var forms = new FormData();
+          // JSON.parse(JSON.stringify(this.houseData)).keys(obj).forEach(function (key) {
+          //   forms.append(key, obj[key])
+          // });
+          forms.append("picture", this.fileList[0].raw);
+          axios
+            .post("http://localhost:8080/test/publish_house", forms, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((Response) => {
+              console.log("数据", Response.data);
+            });
           console.log("submit!");
           // this.$refs.upload.submit();
           return true;
