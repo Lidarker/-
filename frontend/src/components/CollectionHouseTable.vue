@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-table :data="tableData" style="width: 100%" @row-click.stop="handleRowClick">
+    <el-table :data="tableData" style="width: 100%" @row-click="handleRowClick">
       <el-table-column label="房屋图片" width="280">
         <template slot-scope="scope">
           <img
@@ -30,23 +30,25 @@
       </el-table-column>
       <el-table-column label="操作" width="300">
         <template slot-scope="scope">
-          <el-popover placement="top" width="160" v-model="visible">
-            <p>确定取消收藏此房源吗？</p>
-            <div style="text-align: right; margin: 0">
-              <el-button size="mini" type="text" @click="visible = false"
-                >取消</el-button
-              >
-              <el-button
-                type="primary"
-                size="mini"
-                @click="handleDelete(scope.$index, scope.row)"
-                >确定</el-button
-              >
-            </div>
-            <el-button slot="reference" type="danger" size="mini">
-              取消收藏
-            </el-button>
-          </el-popover>
+          <div @click.stop>
+            <el-popover placement="top" width="160" v-model="visible">
+              <p>确定取消收藏此房源吗？</p>
+              <div style="text-align: right; margin: 0">
+                <el-button size="mini" type="text" @click="visible = false"
+                  >取消</el-button
+                >
+                <el-button
+                  type="primary"
+                  size="mini"
+                  @click.stop="handleDelete(scope.$index, scope.row)"
+                  >确定</el-button
+                >
+              </div>
+              <el-button slot="reference" type="danger" size="mini">
+                取消收藏
+              </el-button>
+            </el-popover>
+          </div>
         </template>
       </el-table-column>
     </el-table>
