@@ -43,7 +43,7 @@
                 >确定</el-button
               >
             </div>
-            <el-button slot="reference" type="danger" size="mini">
+            <el-button slot="reference" type="danger" size="mini" @click="removeCollect">
               取消收藏
             </el-button>
           </el-popover>
@@ -82,6 +82,9 @@ export default {
       console.log(row.rid);
       this.$router.push({ path: "/house-detail", query: { id: row.rid } });
     },
+    removeCollect(){
+      console.log("66")
+    }
   },
   created() {
     // sessionStorage.getItem("access_token") 可以取出当前登录的用户的用户名

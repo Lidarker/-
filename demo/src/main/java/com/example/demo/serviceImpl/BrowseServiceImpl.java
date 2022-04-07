@@ -47,12 +47,12 @@ public class BrowseServiceImpl implements BrowseService {
     }
 
     @Override
-    public Integer deleteByRid(int rid) {
+    public Integer deleteByRidAndUid(int rid,int uid) {
         BrowseExample browseExample=new BrowseExample();
         BrowseExample.Criteria criteria=browseExample.createCriteria();
         criteria.andSidEqualTo(rid);
-        int res=browseMapper.deleteByExample(browseExample);
-        return res;
+        criteria.andUidEqualTo(uid);
+        return browseMapper.deleteByExample(browseExample);
     }
 
     @Override

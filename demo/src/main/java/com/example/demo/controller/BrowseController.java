@@ -43,4 +43,11 @@ public class BrowseController {
         Browse browse=new Browse(user.getUid(),rid);
         return browseService.insertBrowse(browse);
     }
+    @RequestMapping(value = "/deleteBrowse",method = RequestMethod.GET)
+    public String deleteBrowse(@RequestParam("account")String account,@RequestParam("rid")int rid){
+        User user=userService.findByAccount(account);
+        int res=browseService.deleteByRidAndUid(rid,user.getUid());
+        if(res==1)return "取消收藏成功";
+        else return "取消失败";
+    }
 }

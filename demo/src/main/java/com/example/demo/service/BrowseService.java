@@ -10,7 +10,7 @@ public interface BrowseService {
     List<Browse> getBrowseByRoomId(int id);
     List<Browse> getBrowseByUserId(int id);
     String insertBrowse(Browse browse);
-    Integer deleteByRid(int rid);
+    Integer deleteByRidAndUid(int rid,int uid);
     List<Browse> getBrowseByUserAndRoom(int rid,int uid);
     String updateBrowse(Browse browse);
 }
