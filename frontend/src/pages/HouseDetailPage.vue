@@ -179,17 +179,21 @@ export default {
   },
   methods: {
     collect() {
-      axios
-        .get("http://localhost:8081/browse/browseHouse", {
-          params: {
-            account: sessionStorage.getItem("access_token"),
-            rid: this.roomId,
-          },
-        })
-        .then((Response) => {
-          console.log("数据", Response.data);
-          alert(Response.data)
-        });
+      if (sessionStorage.getItem("access_token") == null) {
+        alert("请先登录，才能收藏");
+      } else {
+        axios
+          .get("http://localhost:8081/browse/browseHouse", {
+            params: {
+              account: sessionStorage.getItem("access_token"),
+              rid: this.roomId,
+            },
+          })
+          .then((Response) => {
+            console.log("数据", Response.data);
+            alert(Response.data);
+          });
+      }
     },
     goBack() {
       console.log(this.$router);
