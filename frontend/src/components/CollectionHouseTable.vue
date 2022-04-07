@@ -31,10 +31,17 @@
       <el-table-column label="操作" width="300">
         <template slot-scope="scope">
           <div @click.stop>
-            <el-popover placement="top" width="160" v-model="visible[scope.$index]">
+            <el-popover
+              placement="top"
+              width="160"
+              v-model="visible[scope.$index]"
+            >
               <p>确定取消收藏此房源吗？</p>
               <div style="text-align: right; margin: 0">
-                <el-button size="mini" type="text" @click="visible[scope.$index] = false"
+                <el-button
+                  size="mini"
+                  type="text"
+                  @click="visible.splice(scope.$index, 1, false)"
                   >取消</el-button
                 >
                 <el-button
@@ -44,7 +51,12 @@
                   >确定</el-button
                 >
               </div>
-              <el-button @click="handleVisiable" slot="reference" type="danger" size="mini">
+              <el-button
+                @click="handleVisiable"
+                slot="reference"
+                type="danger"
+                size="mini"
+              >
                 取消收藏
               </el-button>
             </el-popover>
@@ -61,15 +73,6 @@ export default {
   data() {
     return {
       tableData: [
-        {
-          rid: "",
-          rtype: "",
-          raddress: "",
-          rprice: "",
-          description: "",
-          rimage: "",
-          certificateid: "",
-        },
         {
           rid: "",
           rtype: "",
@@ -99,17 +102,35 @@ export default {
     handleVisiable() {
       this.visible = this.visible.map((item) => {
         return false;
-      })
+      });
     },
     handleDelete(index, row) {
-      this.visible = false;
+      this.visible.splice(index, 1, false);
       console.log(index, row, row.rid);
+      axios
+        .get("http://localhost:8081/browse/deleteBrowse", {
+          params: { account: this.account, rid: row.rid },
+        })
+        .then((Response) => {
+          alert(Response.data);
+          this.changeData();
+        });
     },
     handleRowClick(row, column) {
       console.log(row.rid);
       this.$router.push({ path: "/house-detail", query: { id: row.rid } });
     },
-
+    changeData() {
+      axios
+        .get("http://localhost:8081/browse/getAllBrowse", {
+          params: { account: this.account },
+        })
+        .then((Response) => {
+          console.log("数据", Response.data);
+          console.log(this.tableData);
+          this.tableData = Response.data;
+        });
+    },
   },
   created() {
     // sessionStorage.getItem("access_token") 可以取出当前登录的用户的用户名
@@ -117,15 +138,7 @@ export default {
     this.account = sessionStorage.getItem("access_token");
   },
   mounted() {
-    axios
-      .get("http://localhost:8081/browse/getAllBrowse", {
-        params: { account: this.account },
-      })
-      .then((Response) => {
-        console.log("数据", Response.data);
-        console.log(this.tableData);
-        this.tableData = Response.data;
-      });
+    this.changeData()
   },
   updated() {
     // axios
