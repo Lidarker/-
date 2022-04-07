@@ -5,7 +5,7 @@
         <template slot-scope="scope">
           <img
             style="width: 100px; height: 100px"
-            :src="'/static/img/' + scope.row.rimage"
+            :src="'http://localhost:8081/pic/getPic?rid=' + scope.row.rid"
           />
         </template>
       </el-table-column>

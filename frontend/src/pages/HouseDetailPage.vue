@@ -15,7 +15,7 @@
         >
           <img
             style="height: 100%"
-            :src="'/static/img/' + room.rimage"
+            :src="'http://localhost:8081/pic/getPic?rid=' + roomId"
             fit="fill"
           />
         </el-carousel-item>
