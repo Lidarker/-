@@ -24,11 +24,12 @@ public class PicController {
         Room room=roomService.getRoomById(rid);
         OutputStream os=null;
         BufferedImage image=null;
+        File file=null;
+        FileInputStream fl=null;
         try {
-           File file=new File("D:\\-\\frontend\\public\\static\\img\\"+room.getRimage());
-           FileInputStream fl=new FileInputStream(file);
+           file=new File("D:\\-\\frontend\\public\\static\\img\\"+room.getRimage());
+            fl=new FileInputStream(file);
             image = ImageIO.read(fl);
-            System.out.println(room.getRimage());
             String type=room.getRimage().split("\\.")[1];
             httpServletResponse.setContentType("image/"+type);
             os = httpServletResponse.getOutputStream();
@@ -43,6 +44,8 @@ public class PicController {
                 os.flush();
                 os.close();
             }
+            if(fl!=null)fl.close();
+
         }
     }
 }
