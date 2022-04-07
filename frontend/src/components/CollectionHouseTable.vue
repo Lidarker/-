@@ -31,10 +31,10 @@
       <el-table-column label="操作" width="300">
         <template slot-scope="scope">
           <div @click.stop>
-            <el-popover placement="top" width="160" v-model="visible">
+            <el-popover placement="top" width="160" v-model="visible[scope.$index]">
               <p>确定取消收藏此房源吗？</p>
               <div style="text-align: right; margin: 0">
-                <el-button size="mini" type="text" @click="visible = false"
+                <el-button size="mini" type="text" @click="visible[scope.$index] = false"
                   >取消</el-button
                 >
                 <el-button
@@ -44,7 +44,7 @@
                   >确定</el-button
                 >
               </div>
-              <el-button slot="reference" type="danger" size="mini">
+              <el-button @click="handleVisiable" slot="reference" type="danger" size="mini">
                 取消收藏
               </el-button>
             </el-popover>
@@ -70,12 +70,37 @@ export default {
           rimage: "",
           certificateid: "",
         },
+        {
+          rid: "",
+          rtype: "",
+          raddress: "",
+          rprice: "",
+          description: "",
+          rimage: "",
+          certificateid: "",
+        },
       ],
       account: {},
-      visible: false,
+      visible: [false],
     };
   },
+  watch: {
+    tableData: {
+      immediate: true,
+      handler(newValue, oldValue) {
+        this.visible = [];
+        newValue.forEach((item, index) => {
+          this.visible.push(false);
+        });
+      },
+    },
+  },
   methods: {
+    handleVisiable() {
+      this.visible = this.visible.map((item) => {
+        return false;
+      })
+    },
     handleDelete(index, row) {
       this.visible = false;
       console.log(index, row, row.rid);
