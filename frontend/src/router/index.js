@@ -18,7 +18,7 @@ import UserAudit from "../pages/AdministratorPage/UserAudit"
 import axios from "axios"
 
 const router = new VueRouter({
-    mode: 'history',
+    mode: 'hash',
     
     routes: [
         {
