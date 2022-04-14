@@ -157,6 +157,7 @@ export default {
           return true;
         } else {
           console.log("error submit!!");
+          console.log("666")
           return false;
         }
       });
