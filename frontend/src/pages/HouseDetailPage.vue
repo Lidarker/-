@@ -15,7 +15,7 @@
         >
           <img
             style="height: 100%"
-            :src="'http://localhost:8081/pic/getPic?rid=' + roomId"
+            :src="'http://172.19.241.36:8081/pic/getPic?rid=' + roomId"
             fit="fill"
           />
         </el-carousel-item>
@@ -179,6 +179,7 @@ export default {
   },
   methods: {
     collect() {
+<<<<<<< Updated upstream
       if (sessionStorage.getItem("access_token") == null) {
         alert("请先登录，才能收藏");
       } else {
@@ -194,6 +195,19 @@ export default {
             alert(Response.data);
           });
       }
+=======
+      axios
+        .get("http://172.19.241.36:8081/browse/browseHouse", {
+          params: {
+            account: sessionStorage.getItem("access_token"),
+            rid: this.roomId,
+          },
+        })
+        .then((Response) => {
+          console.log("数据", Response.data);
+          alert(Response.data)
+        });
+>>>>>>> Stashed changes
     },
     goBack() {
       console.log(this.$router);
@@ -205,7 +219,7 @@ export default {
       this.userComment.comment.rid = this.roomId;
       this.userComment.comment.detail = this.commentContent;
       axios
-        .post("http://localhost:8081/commitComment", this.userComment)
+        .post("http://172.19.241.36:8081/commitComment", this.userComment)
         .then((res) => {
           console.log("res=>", res);
           alert(res.data);
@@ -216,7 +230,7 @@ export default {
   created() {
     this.roomId = this.$route.query.id;
     axios
-      .get("http://localhost:8081/room/getRoom", {
+      .get("http://172.19.241.36:8081/room/getRoom", {
         params: { id: this.roomId },
       })
       .then((Response) => {
@@ -224,7 +238,7 @@ export default {
         this.room = Response.data;
       });
     axios
-      .get("http://localhost:8081/getOwner", { params: { rid: this.roomId } })
+      .get("http://172.19.241.36:8081/getOwner", { params: { rid: this.roomId } })
       .then((Response) => {
         console.log("数据", Response.data);
         this.user = Response.data;
