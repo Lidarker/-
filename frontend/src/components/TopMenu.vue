@@ -101,11 +101,11 @@ export default {
     searchWord(){
        if(this.searchInput==null)
       {
-        axios.get("http://localhost:8081/getAllRoom").then((Response)=>{
+        axios.get("http://172.19.241.36:8081/getAllRoom").then((Response)=>{
           this.$bus.$emit('getData',Response.data)
         });
       }else{
-        axios.get("http://localhost:8081/getRoom",{params:{word:this.searchInput}}).then((Response)=>{
+        axios.get("http://172.19.241.36:8081/getRoom",{params:{word:this.searchInput}}).then((Response)=>{
         this.$bus.$emit('getData',Response.data)
         });
       }

@@ -47,7 +47,7 @@ export default {
     updateNow() {
       console.log("父组件让我更新数据");
       axios
-        .get("http://localhost:8081/getCommentByRoomId", {
+        .get("http://172.19.241.36:8081/getCommentByRoomId", {
           params: { rid: this.roomId },
         })
         .then((Response) => {
@@ -65,7 +65,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8081/getCommentByRoomId", {
+      .get("http://172.19.241.36:8081/getCommentByRoomId", {
         params: { rid: this.roomId },
       })
       .then((Response) => {

@@ -5,7 +5,7 @@
         <template slot-scope="scope">
           <img
             style="width: 100px; height: 100px"
-            :src="'http://localhost:8081/pic/getPic?rid=' + scope.row.rid"
+            :src="'http://172.19.241.36:8081/pic/getPic?rid=' + scope.row.rid"
           />
         </template>
       </el-table-column>
@@ -148,7 +148,7 @@ export default {
       })
         .then(({ value }) => {
           axios
-            .get("http://localhost:8081/room/deleteRoom", {
+            .get("http://172.19.241.36:8081/room/deleteRoom", {
               params: { rid: row.rid },
             })
             .then((Response) => {
@@ -166,7 +166,7 @@ export default {
         if (valid) {
           this.editVisible = false;
           axios
-            .post("http://localhost:8081/room/updateRoom", this.editData)
+            .post("http://172.19.241.36:8081/room/updateRoom", this.editData)
             .then((res) => {
               this.changeData();
             });
@@ -178,7 +178,7 @@ export default {
     },
     changeData() {
       axios
-        .get("http://localhost:8081/getRoomByAccount", {
+        .get("http://172.19.241.36:8081/getRoomByAccount", {
           params: { account: this.account },
         })
         .then((Response) => {
@@ -192,7 +192,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8081/getRoomByAccount", {
+      .get("http://172.19.241.36:8081/getRoomByAccount", {
         params: { account: this.account },
       })
       .then((Response) => {

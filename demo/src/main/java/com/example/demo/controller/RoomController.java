@@ -71,7 +71,7 @@ public class RoomController {
         String picName = params.getParameter("pic_uid") + ".jpg";
         if (!file.isEmpty()) {
             //部署后需要改路径
-            String filePath = "D:\\-\\frontend\\public\\static\\img\\" + picName;
+            String filePath = "/home/liq/rent/" + picName;
             File fileSave = new File(filePath);
             try {
                 file.transferTo(fileSave);
@@ -102,7 +102,7 @@ public class RoomController {
         if (roomService.deleteRoomById(rid) == 1) {
             if (collectionService.deleteByRid(rid) == 1) {
                 //需要删除
-                File file = new File("D:\\-\\frontend\\public\\static\\img\\" + room.getRimage());
+                File file = new File("/home/liq/rent/" + room.getRimage());
                 if (file.exists()) {
                     if (file.delete()) {
                         return "删除成功";

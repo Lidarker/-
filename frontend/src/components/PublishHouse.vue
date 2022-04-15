@@ -136,7 +136,7 @@ export default {
           forms.append("picture", this.fileList[0].raw);
           forms.append("account", sessionStorage.getItem("access_token"));
           axios
-            .post("http://localhost:8081/room/insertHouse", forms, {
+            .post("http://172.19.241.36:8081/room/insertHouse", forms, {
               headers: {
                 "Content-Type": "multipart/form-data",
               },

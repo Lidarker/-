@@ -27,7 +27,7 @@ public class PicController {
         File file=null;
         FileInputStream fl=null;
         try {
-           file=new File("D:\\-\\frontend\\public\\static\\img\\"+room.getRimage());
+           file=new File("/home/liq/rent/"+room.getRimage());
             fl=new FileInputStream(file);
             image = ImageIO.read(fl);
             String type=room.getRimage().split("\\.")[1];

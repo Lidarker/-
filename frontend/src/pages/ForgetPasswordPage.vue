@@ -105,7 +105,7 @@ export default {
       this.$refs["form"].validate((valid) => {
         if (valid) {
           axios
-            .get("http://localhost:8081/user/changePassword", {
+            .get("http://172.19.241.36:8081/user/changePassword", {
               params: {
                 phone: this.form.phone,
                 userName: this.form.account,

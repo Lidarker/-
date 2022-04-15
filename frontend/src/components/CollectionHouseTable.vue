@@ -5,7 +5,7 @@
         <template slot-scope="scope">
           <img
             style="width: 100px; height: 100px"
-            :src="'http://localhost:8081/pic/getPic?rid=' + scope.row.rid"
+            :src="'http://172.19.241.36:8081/pic/getPic?rid=' + scope.row.rid"
           />
         </template>
       </el-table-column>
@@ -108,7 +108,7 @@ export default {
       this.visible.splice(index, 1, false);
       console.log(index, row, row.rid);
       axios
-        .get("http://localhost:8081/browse/deleteBrowse", {
+        .get("http://172.19.241.36:8081/browse/deleteBrowse", {
           params: { account: this.account, rid: row.rid },
         })
         .then((Response) => {
@@ -122,7 +122,7 @@ export default {
     },
     changeData() {
       axios
-        .get("http://localhost:8081/browse/getAllBrowse", {
+        .get("http://172.19.241.36:8081/browse/getAllBrowse", {
           params: { account: this.account },
         })
         .then((Response) => {
@@ -142,7 +142,7 @@ export default {
   },
   updated() {
     // axios
-    //   .get("http://localhost:8081/getRoomByAccount", {
+    //   .get("http://172.19.241.36:8081/getRoomByAccount", {
     //     params: { account: this.account },
     //   })
     //   .then((Response) => {

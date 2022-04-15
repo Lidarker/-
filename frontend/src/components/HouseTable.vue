@@ -9,7 +9,7 @@
       <template slot-scope="scope">
         <img
           style="width: 100px; height: 100px"
-          :src="'http://localhost:8081/pic/getPic?rid=' + scope.row.rid"
+          :src="'http://172.19.241.36:8081/pic/getPic?rid=' + scope.row.rid"
         />
       </template>
     </el-table-column>
@@ -69,7 +69,7 @@ export default {
     }
   },
   created() {
-    axios.get("http://localhost:8081/room/getAllRoom").then((Response) => {
+    axios.get("http://172.19.241.36:8081/room/getAllRoom").then((Response) => {
       console.log("数据", Response.data);
       console.log(this.tableData);
       this.tableData = Response.data;
